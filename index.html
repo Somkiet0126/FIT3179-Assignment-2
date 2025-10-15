@@ -1,57 +1,92 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Import Vega & Vega-Lite -->
+  <!-- Vega & Vega-Lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
 
-  <!-- CSS file -->
+  <!-- (Optional) your page-wide CSS -->
   <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
 
   <style>
-    /* Force vertical stacking and centering of charts */
-    #choropleth_map, #bubble_plot {
-      display: block;   
-      clear: both;      
-      margin: 40px auto; 
-      max-width: 900px;
+    :root {
+      --chart-max-width: 900px;
+      --gap: 28px;
     }
 
-    /* Title styling */
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
     h1 {
-      text-align: center !important;
-      color: black !important;
-      margin-bottom: 40px !important;
-      display: block !important;
-      position: relative !important;
-      z-index: 10 !important;
+      text-align: center;
+      color: #111;
+      margin: 28px 12px 12px;
+    }
+
+    /* Dashboard grid: 2 columns on desktop, 1 col on small screens */
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--gap);
+      max-width: calc(var(--chart-max-width) * 2 + var(--gap));
+      margin: 0 auto 48px;
+      padding: 0 12px 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 1100px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+        max-width: var(--chart-max-width);
+      }
+    }
+
+    /* Chart containers */
+    .chart {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      padding: 10px; /* small padding so embedded charts aren’t flush */
+    }
+
+    /* Make embeds responsive to container width */
+    .chart .vega-embed {
+      width: 100%;
     }
   </style>
 </head>
 <body>
 
-  <!-- Page Title -->
   <h1>Healthcare Access and Disease Trends in Malaysia</h1>
 
-  <!-- Chart containers -->
-  <div id="choropleth_map"></div>
-  <div id="bubble_plot"></div>
+  <div class="dashboard">
+    <!-- Row 1 -->
+    <div id="choropleth_map" class="chart"></div>
+    <div id="hospital_heatmap" class="chart"></div>
+
+    <!-- Row 2 -->
+    <div id="bubble_plot" class="chart"></div>
+    <div id="std_dumbbell" class="chart"></div>
+  </div>
 
   <script type="text/javascript">
-    // Choropleth map
-    var spec1 = "healthcare_staff_choropleth_map.vg.json";
-    vegaEmbed('#choropleth_map', spec1)
-      .then(function(result) {
-        // result.view is the Vega view instance
-      }).catch(console.error);
+    // File paths for your Vega/Vega-Lite specs
+    const specChoropleth = "healthcare_staff_choropleth_map.vg.json";
+    const specHeatmap    = "hospital_facilities_heatmap.vg.json";
+    const specBubble     = "infectious_disease_bubble_plot.vg.json";
+    const specDumbbell   = "std_dumbell_chart.vg.json";
 
-    // Infectious disease bubble plot
-    var spec2 = "infectious_disease_bubble_plot.vg.json";
-    vegaEmbed('#bubble_plot', spec2)
-      .then(function(result) {
-        // result.view is the Vega view instance
-      }).catch(console.error);
+    // Optional: consistent embed options
+    const embedOpt = { actions: false, renderer: "canvas" };
+
+    // Embed charts
+    vegaEmbed('#choropleth_map', specChoropleth, embedOpt).catch(console.error);
+    vegaEmbed('#hospital_heatmap', specHeatmap, embedOpt).catch(console.error);
+    vegaEmbed('#bubble_plot', specBubble, embedOpt).catch(console.error);
+    vegaEmbed('#std_dumbbell', specDumbbell, embedOpt).catch(console.error);
   </script>
 
 </body>
