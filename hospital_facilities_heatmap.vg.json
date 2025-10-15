@@ -1,9 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Private Hospitals, Nursing & Maternity Homes Accessibility in Malaysia",
-    "subtitle": "Counts by state and year",
-    "fontSize": 14,
+    "text": ["Private Hospitals, Nursing & Maternity Homes", "Accessibility in Malaysia"],
+    "fontSize": 18,
     "font": "Times New Roman",
     "anchor": "middle"
   },
