@@ -1,0 +1,172 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "params": [
+    {
+      "name": "disease_selection",
+      "value": "Cholera",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Cholera",
+          "Dysentry",
+          "Food poisoning",
+          "Typhoid",
+          "Viral Hepatitis A"
+        ],
+        "labels": [
+          "Cholera",
+          "Dysentry",
+          "Food Poisoning",
+          "Typhoid",
+          "Viral Hepatitis A"
+        ],
+        "name": "Select Disease: "
+      }
+    }
+  ],
+  "width": 900,
+  "height": 600,
+  "title": "Incidence Rate vs Number of Infectious Disease Cases by Year",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179/main/Number%20of%20Cases%20of%20Infectious%20Diseases%20v2.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {"filter": "datum['Infectious Diseases'] == disease_selection"}
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 0.8,
+        "stroke": "black",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": {
+            "labelAngle": 0,
+            "grid": true,
+            "gridColor": "#e5e7eb",
+            "gridWidth": 0.8,
+            "tickBand": "center"
+          }
+        },
+        "y": {
+          "field": "Incidence Rate",
+          "type": "quantitative",
+          "title": "Incidence Rate (per 100,000 people)",
+          "axis": {"grid": true, "gridColor": "#f0f0f0", "gridWidth": 0.8}
+        },
+        "size": {
+          "field": "Number of Cases",
+          "type": "quantitative",
+          "title": "Number of Cases",
+          "scale": {"range": [50, 1300]},
+          "legend": {
+            "orient": "right",
+            "titleFontSize": 12,
+            "labelFontSize": 11
+          }
+        },
+        "color": {"value": "#3b82f6"},
+        "tooltip": [
+          {"field": "Year", "title": "Year"},
+          {"field": "Infectious Diseases", "title": "Disease"},
+          {"field": "Number of Cases", "title": "Cases"},
+          {"field": "Incidence Rate", "title": "Incidence Rate"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "Infectious Diseases": "Cholera",
+            "Year": "2001",
+            "Incidence Rate": 2.3,
+            "text": "Peak outbreak in 2001"
+          },
+          {
+            "Infectious Diseases": "Cholera",
+            "Year": "2017",
+            "Incidence Rate": 0,
+            "text": "Almost eradicated"
+          },
+          {
+            "Infectious Diseases": "Dysentry",
+            "Year": "2000",
+            "Incidence Rate": 1.9,
+            "text": "Early 2000s peak"
+          },
+          {
+            "Infectious Diseases": "Dysentry",
+            "Year": "2021",
+            "Incidence Rate": 0.6,
+            "text": "Gradual resurgence"
+          },
+          {
+            "Infectious Diseases": "Food poisoning",
+            "Year": "2008",
+            "Incidence Rate": 62.5,
+            "text": "Highest recorded spike"
+          },
+          {
+            "Infectious Diseases": "Food poisoning",
+            "Year": "2021",
+            "Incidence Rate": 18.4,
+            "text": "Decline after 2020"
+          },
+          {
+            "Infectious Diseases": "Typhoid",
+            "Year": "2005",
+            "Incidence Rate": 4.1,
+            "text": "Major spike in 2005"
+          },
+          {
+            "Infectious Diseases": "Typhoid",
+            "Year": "2021",
+            "Incidence Rate": 0.3,
+            "text": "Reduced cases"
+          },
+          {
+            "Infectious Diseases": "Viral Hepatitis A",
+            "Year": "2000",
+            "Incidence Rate": 2.1,
+            "text": "2000 high cases"
+          },
+          {
+            "Infectious Diseases": "Viral Hepatitis A",
+            "Year": "2018",
+            "Incidence Rate": 0.3,
+            "text": "Low due to vaccination"
+          }
+        ]
+      },
+      "transform": [
+        {"filter": "datum['Infectious Diseases'] == disease_selection"}
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "dy": -25,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "black"
+      },
+      "encoding": {
+        "x": {"field": "Year", "type": "ordinal"},
+        "y": {"field": "Incidence Rate", "type": "quantitative"},
+        "text": {"field": "text"}
+      }
+    }
+  ],
+  "config": {
+    "title": {"fontSize": 23, "font": "Times New Roman", "anchor": "middle"},
+    "axis": {"labelFontSize": 12, "titleFontSize": 14}
+  }
+}
