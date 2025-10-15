@@ -43,7 +43,7 @@
       "type": "quantitative",
       "title": "Total Facilities",
       "scale": { "scheme": "blues" },
-      "legend": { "titleFontSize": 11 }   // reduced legend title size
+      "legend": { "titleFontSize": 11 }
     },
     "tooltip": [
       { "field": "StateClean", "title": "State" },
