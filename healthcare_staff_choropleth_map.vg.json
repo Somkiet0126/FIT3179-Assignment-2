@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 700,
-  "height": 600,
+  "height": 650,
   "title": "Healthcare Staff per 100,000 People by State in Malaysia (2022)",
   "projection": {"type": "mercator"},
   "layer": [
