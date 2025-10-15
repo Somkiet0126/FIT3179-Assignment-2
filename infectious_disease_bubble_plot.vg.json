@@ -49,7 +49,7 @@
           "field": "Number of Cases",
           "type": "quantitative",
           "title": "Number of Cases",
-          "scale": { "range": [50, 800] },
+          "scale": { "range": [30, 800] },
           "legend": { "orient": "right", "titleFontSize": 12, "labelFontSize": 11 }
         },
         "color": { "value": "#3b82f6" },
@@ -91,6 +91,6 @@
 
   "config": {
     "title": { "fontSize": 18, "font": "Times New Roman", "anchor": "middle" },
-    "axis": { "labelFontSize": 12, "titleFontSize": 14 }
+    "axis": { "labelFontSize": 9, "titleFontSize": 14 }
   }
 }
