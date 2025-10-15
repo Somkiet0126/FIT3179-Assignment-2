@@ -56,6 +56,14 @@
     .chart .vega-embed {
       width: 100%;
     }
+
+    /* Captions under charts */
+    .caption {
+      margin: 8px 2px 2px;
+      font-size: 13px;
+      line-height: 1.35;
+      color: #555;
+    }
   </style>
 </head>
 <body>
@@ -64,12 +72,34 @@
 
   <div class="dashboard">
     <!-- Row 1 -->
-    <div id="choropleth_map" class="chart"></div>
-    <div id="hospital_heatmap" class="chart"></div>
+    <div class="chart">
+      <div id="choropleth_map"></div>
+      <p class="caption">
+        Kuala Lumpur has by far the highest density—913 staff per 100k, nearly 3× Selangor’s 324 (the lowest). Small territories also rank high, e.g., Perlis 712.
+      </p>
+    </div>
+
+    <div class="chart">
+      <div id="hospital_heatmap"></div>
+      <p class="caption">
+        Selangor and W.P. Kuala Lumpur consistently have the most facilities, while Perlis/Labuan/Putrajaya stay near zero; most states dip around 2020 and rebound by 2021.
+      </p>
+    </div>
 
     <!-- Row 2 -->
-    <div id="bubble_plot" class="chart"></div>
-    <div id="std_dumbbell" class="chart"></div>
+    <div class="chart">
+      <div id="bubble_plot"></div>
+      <p class="caption">
+        Food poisoning dominates every year (spikes in 2007–2008 and 2014–2016); all diseases dip sharply in 2020–2021; cholera nearly vanished in 2017 (2 cases).
+      </p>
+    </div>
+
+    <div class="chart">
+      <div id="std_dumbbell"></div>
+      <p class="caption">
+        2017→2022, syphilis surged nationwide (2,591 → 4,669; +80%), with big jumps in Pulau Pinang (85 → 455), Selangor (664 → 1,161) and W.P. Kuala Lumpur (320 → 523).
+      </p>
+    </div>
   </div>
 
   <script type="text/javascript">
@@ -79,7 +109,7 @@
     const specBubble     = "infectious_disease_bubble_plot.vg.json";
     const specDumbbell   = "std_dumbell_chart.vg.json";
 
-    // Optional: consistent embed options
+    // Consistent embed options
     const embedOpt = { actions: false, renderer: "svg" };
 
     // Embed charts
