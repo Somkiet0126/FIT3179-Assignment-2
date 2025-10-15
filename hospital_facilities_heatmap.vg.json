@@ -18,10 +18,7 @@
   },
 
   "transform": [
-    {
-      "calculate": "toNumber(datum['No. of Private Hospitals, Nursing and Maternity Homes'])",
-      "as": "count"
-    },
+    { "calculate": "toNumber(datum['No. of Private Hospitals, Nursing and Maternity Homes'])", "as": "count" },
     { "calculate": "trim(datum.State)", "as": "StateClean" }
   ],
 
@@ -45,7 +42,8 @@
       "field": "count",
       "type": "quantitative",
       "title": "Total Facilities",
-      "scale": { "scheme": "blues" }
+      "scale": { "scheme": "blues" },
+      "legend": { "titleFontSize": 11 }   // reduced legend title size
     },
     "tooltip": [
       { "field": "StateClean", "title": "State" },
