@@ -3,7 +3,7 @@
   "width": "container",
   "height": 600,
   "autosize": { "type": "fit", "contains": "padding" },
-  "title": "Healthcare Staff per 100,000 People by State in Malaysia (2022)",
+  "title": "Healthcare Staff per 100,000 People\nby State in Malaysia (2022)",
   "projection": { "type": "mercator" },
   "layer": [
     {
