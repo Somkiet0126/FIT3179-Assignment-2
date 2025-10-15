@@ -1,29 +1,31 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "width": "container",
+  "height": 600,
+  "autosize": { "type": "fit", "contains": "padding" },
+
   "title": {
-    "text": "STD in Malaysia — State Change Between Two Years",
+    "text": ["STD in Malaysia — State Change", "Between Two Years"],
     "subtitle": "Select disease, metric, and two years to compare",
-    "fontSize": 23,
+    "fontSize": 18,
     "font": "Times New Roman",
     "anchor": "middle"
   },
-  "width": 600,
-  "height": 600,
+
   "data": {
     "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179-Assignment-2/main/std_state.csv",
-    "format": {
-      "type": "csv",
-      "parse": {"cases": "number", "incidence": "number"}
-    }
+    "format": { "type": "csv", "parse": { "cases": "number", "incidence": "number" } }
   },
+
   "params": [
     {
       "name": "disease_sel",
       "value": "aids",
       "bind": {
         "input": "select",
-        "options": ["aids", "hiv", "chancroid", "gonorrhea", "syphillis"],
-        "labels": ["AIDS", "HIV", "Chancroid", "Gonorrhea", "Syphilis"],
+        "options": ["aids","hiv","chancroid","gonorrhea","syphillis"],
+        "labels": ["AIDS","HIV","Chancroid","Gonorrhea","Syphilis"],
         "name": "Disease: "
       }
     },
@@ -32,148 +34,97 @@
       "value": "incidence",
       "bind": {
         "input": "select",
-        "options": ["incidence", "cases"],
-        "labels": ["Incidence rate per 100k population", "Number of cases"],
+        "options": ["incidence","cases"],
+        "labels": ["Incidence rate per 100k population","Number of cases"],
         "name": "Metric: "
       }
     },
     {
       "name": "year_a",
       "value": "2017",
-      "bind": {
-        "input": "select",
-        "options": ["2017", "2018", "2019", "2020", "2021", "2022"],
-        "name": "Year A: "
-      }
+      "bind": { "input": "select", "options": ["2017","2018","2019","2020","2021","2022"], "name": "Year A: " }
     },
     {
       "name": "year_b",
       "value": "2022",
-      "bind": {
-        "input": "select",
-        "options": ["2017", "2018", "2019", "2020", "2021", "2022"],
-        "name": "Year B: "
-      }
+      "bind": { "input": "select", "options": ["2017","2018","2019","2020","2021","2022"], "name": "Year B: " }
     }
   ],
+
   "transform": [
-    {"calculate": "substring(datum.date, 0, 4)", "as": "Year"},
-    {"calculate": "lower(trim(datum.disease))", "as": "disease_lc"},
-    {"calculate": "trim(datum.state)", "as": "state_trim"},
-    {
-      "filter": "datum.state_trim != 'Malaysia' && datum.disease_lc == disease_sel"
-    },
-    {"filter": "datum.Year == year_a || datum.Year == year_b"},
-    {"fold": ["incidence", "cases"], "as": ["metric_name", "value"]},
-    {"filter": "datum.metric_name == metric_sel"},
-    {"pivot": "Year", "value": "value", "groupby": ["state_trim"]},
-    {"calculate": "toNumber(datum[year_a])", "as": "valA"},
-    {"calculate": "toNumber(datum[year_b])", "as": "valB"},
-    {"calculate": "datum.valB - datum.valA", "as": "delta"},
-    {
-      "calculate": "datum.valA != 0 ? (datum.delta / datum.valA) * 100 : null",
-      "as": "delta_pct"
-    },
-    {
-      "calculate": "isFinite(datum.valA) && isFinite(datum.valB) ? min(datum.valA, datum.valB) : null",
-      "as": "x_min"
-    },
-    {
-      "calculate": "isFinite(datum.valA) && isFinite(datum.valB) ? max(datum.valA, datum.valB) : null",
-      "as": "x_max"
-    },
-    {"filter": "isValid(datum.x_min) && isValid(datum.x_max)"},
-    {
-      "calculate": "metric_sel == 'incidence' ? 'Incidence rate per 100k' : 'Number of cases'",
-      "as": "metric_label"
-    },
-    {"calculate": "year_a", "as": "yearA"},
-    {"calculate": "year_b", "as": "yearB"},
-    {
-      "calculate": "metric_sel == 'cases' ? format(datum.valA, '.0f') : format(datum.valA, '.2f')",
-      "as": "valA_str"
-    },
-    {
-      "calculate": "metric_sel == 'cases' ? format(datum.valB, '.0f') : format(datum.valB, '.2f')",
-      "as": "valB_str"
-    },
-    {
-      "calculate": "metric_sel == 'cases' ? format(datum.delta, '.0f') : format(datum.delta, '.2f')",
-      "as": "delta_str"
-    },
-    {
-      "calculate": "isFinite(datum.delta_pct) ? format(datum.delta_pct/100, '+.1%') : 'N/A'",
-      "as": "delta_pct_str"
-    }
+    { "calculate": "substring(datum.date, 0, 4)", "as": "Year" },
+    { "calculate": "lower(trim(datum.disease))", "as": "disease_lc" },
+    { "calculate": "trim(datum.state)", "as": "state_trim" },
+    { "filter": "datum.state_trim != 'Malaysia' && datum.disease_lc == disease_sel" },
+    { "filter": "datum.Year == year_a || datum.Year == year_b" },
+    { "fold": ["incidence","cases"], "as": ["metric_name","value"] },
+    { "filter": "datum.metric_name == metric_sel" },
+    { "pivot": "Year", "value": "value", "groupby": ["state_trim"] },
+    { "calculate": "toNumber(datum[year_a])", "as": "valA" },
+    { "calculate": "toNumber(datum[year_b])", "as": "valB" },
+    { "calculate": "datum.valB - datum.valA", "as": "delta" },
+    { "calculate": "datum.valA != 0 ? (datum.delta / datum.valA) * 100 : null", "as": "delta_pct" },
+    { "calculate": "isFinite(datum.valA) && isFinite(datum.valB) ? min(datum.valA, datum.valB) : null", "as": "x_min" },
+    { "calculate": "isFinite(datum.valA) && isFinite(datum.valB) ? max(datum.valA, datum.valB) : null", "as": "x_max" },
+    { "filter": "isValid(datum.x_min) && isValid(datum.x_max)" },
+    { "calculate": "metric_sel == 'incidence' ? 'Incidence rate per 100k' : 'Number of cases'", "as": "metric_label" },
+    { "calculate": "year_a", "as": "yearA" },
+    { "calculate": "year_b", "as": "yearB" },
+    { "calculate": "metric_sel == 'cases' ? format(datum.valA, '.0f') : format(datum.valA, '.2f')", "as": "valA_str" },
+    { "calculate": "metric_sel == 'cases' ? format(datum.valB, '.0f') : format(datum.valB, '.2f')", "as": "valB_str" },
+    { "calculate": "metric_sel == 'cases' ? format(datum.delta, '.0f') : format(datum.delta, '.2f')", "as": "delta_str" },
+    { "calculate": "isFinite(datum.delta_pct) ? format(datum.delta_pct/100, '+.1%') : 'N/A'", "as": "delta_pct_str" }
   ],
+
   "layer": [
     {
-      "mark": {"type": "rule", "strokeWidth": 2, "opacity": 0.7},
+      "mark": { "type": "rule", "strokeWidth": 2, "opacity": 0.7 },
       "encoding": {
-        "y": {
-          "field": "state_trim",
-          "type": "nominal",
-          "sort": {"field": "delta", "order": "descending"},
-          "title": "State"
-        },
-        "x": {
-          "field": "x_min",
-          "type": "quantitative",
-          "title": "Selected metric",
-          "axis": {"grid": true, "gridColor": "#e5e7eb"}
-        },
-        "x2": {"field": "x_max"},
+        "y": { "field": "state_trim", "type": "nominal", "sort": { "field": "delta", "order": "descending" }, "title": "State" },
+        "x": { "field": "x_min", "type": "quantitative", "title": "Selected metric", "axis": { "grid": true, "gridColor": "#e5e7eb" } },
+        "x2": { "field": "x_max" },
         "tooltip": [
-          {"field": "state_trim", "title": "State"},
-          {"field": "metric_label", "title": "Metric"},
-          {"field": "yearA", "title": "Year A"},
-          {"field": "yearB", "title": "Year B"},
-          {"field": "delta_str", "title": "Δ (B − A)"}
+          { "field": "state_trim", "title": "State" },
+          { "field": "metric_label", "title": "Metric" },
+          { "field": "yearA", "title": "Year A" },
+          { "field": "yearB", "title": "Year B" },
+          { "field": "delta_str", "title": "Δ (B − A)" }
         ]
       }
     },
     {
-      "mark": {"type": "point", "filled": true, "size": 160},
+      "mark": { "type": "point", "filled": true, "size": 160 },
       "encoding": {
-        "y": {
-          "field": "state_trim",
-          "type": "nominal",
-          "sort": {"field": "delta", "order": "descending"},
-          "title": "State"
-        },
-        "x": {"field": "valA", "type": "quantitative"},
-        "color": {"value": "#4f46e5"},
+        "y": { "field": "state_trim", "type": "nominal", "sort": { "field": "delta", "order": "descending" }, "title": "State" },
+        "x": { "field": "valA", "type": "quantitative" },
+        "color": { "value": "#4f46e5" },
         "tooltip": [
-          {"field": "state_trim", "title": "State"},
-          {"field": "metric_label", "title": "Metric"},
-          {"field": "yearA", "title": "Year"},
-          {"field": "valA_str", "title": "Value"}
+          { "field": "state_trim", "title": "State" },
+          { "field": "metric_label", "title": "Metric" },
+          { "field": "yearA", "title": "Year" },
+          { "field": "valA_str", "title": "Value" }
         ]
       }
     },
     {
-      "mark": {"type": "point", "filled": true, "size": 160},
+      "mark": { "type": "point", "filled": true, "size": 160 },
       "encoding": {
-        "y": {
-          "field": "state_trim",
-          "type": "nominal",
-          "sort": {"field": "delta", "order": "descending"},
-          "title": "State"
-        },
-        "x": {"field": "valB", "type": "quantitative"},
-        "color": {"value": "#06b6d4"},
+        "y": { "field": "state_trim", "type": "nominal", "sort": { "field": "delta", "order": "descending" }, "title": "State" },
+        "x": { "field": "valB", "type": "quantitative" },
+        "color": { "value": "#06b6d4" },
         "tooltip": [
-          {"field": "state_trim", "title": "State"},
-          {"field": "metric_label", "title": "Metric"},
-          {"field": "yearB", "title": "Year"},
-          {"field": "valB_str", "title": "Value"}
+          { "field": "state_trim", "title": "State" },
+          { "field": "metric_label", "title": "Metric" },
+          { "field": "yearB", "title": "Year" },
+          { "field": "valB_str", "title": "Value" }
         ]
       }
     }
   ],
+
   "config": {
-    "axis": {"labelFontSize": 11, "titleFontSize": 12},
-    "axisY": {"title": "State", "titlePadding": 10},
-    "view": {"stroke": null}
+    "axis": { "labelFontSize": 11, "titleFontSize": 12 },
+    "axisY": { "title": "State", "titlePadding": 10 },
+    "view": { "stroke": null }
   }
 }
