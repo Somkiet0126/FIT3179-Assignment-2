@@ -4,6 +4,7 @@
   "width": "container",
   "height": 600,
   "autosize": { "type": "fit", "contains": "padding" },
+  "padding": { "right": 20 },
 
   "title": {
     "text": ["STD in Malaysia — State Change", "Between Two Years"],
