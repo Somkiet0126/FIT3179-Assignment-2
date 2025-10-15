@@ -11,14 +11,12 @@
 
   <style>
     :root {
-      /* Max width of each chart card in the 2-col grid */
-      --chart-max-width: 480px;  /* <- adjust this if you want them bigger/smaller */
-      --gap: 24px;
+      --chart-max-width: 900px;
+      --gap: 28px;
     }
 
-    html, body { margin: 0; overflow-x: hidden; }
-
     body {
+      margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     }
 
@@ -34,10 +32,9 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: var(--gap);
       max-width: calc(var(--chart-max-width) * 2 + var(--gap));
-      margin: 0 auto 40px;
+      margin: 0 auto 48px;
       padding: 0 12px 24px;
       align-items: start;
-      box-sizing: border-box;
     }
 
     @media (max-width: 1100px) {
@@ -52,16 +49,12 @@
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-      padding: 8px;
-      max-width: var(--chart-max-width);
-      width: 100%;
-      box-sizing: border-box;
+      padding: 10px; /* small padding so embedded charts aren’t flush */
     }
 
-    /* Make embeds fill the container width */
-    .chart .vega-embed, .chart canvas, .chart svg {
-      width: 100% !important;
-      height: auto;
+    /* Make embeds responsive to container width */
+    .chart .vega-embed {
+      width: 100%;
     }
   </style>
 </head>
@@ -86,29 +79,14 @@
     const specBubble     = "infectious_disease_bubble_plot.vg.json";
     const specDumbbell   = "std_dumbell_chart.vg.json";
 
-    // Base embed options (no toolbar)
-    const baseOpt = { actions: false, renderer: "canvas" };
+    // Optional: consistent embed options
+    const embedOpt = { actions: false, renderer: "canvas" };
 
-    // Helper: embed with a size patch so specs are responsive
-    function embedResponsive(target, specUrl, height=360) {
-      const opt = {
-        ...baseOpt,
-        patch: (spec) => ({
-          // Preserve original spec but enforce responsive sizing
-          ...spec,
-          width: "container",
-          height: height,
-          autosize: { type: "fit", contains: "padding" }
-        })
-      };
-      return vegaEmbed(target, specUrl, opt).catch(console.error);
-    }
-
-    // Embed all four charts with sensible heights
-    embedResponsive('#choropleth_map', specChoropleth, 360);
-    embedResponsive('#hospital_heatmap', specHeatmap, 360);
-    embedResponsive('#bubble_plot', specBubble, 360);
-    embedResponsive('#std_dumbbell', specDumbbell, 360);
+    // Embed charts
+    vegaEmbed('#choropleth_map', specChoropleth, embedOpt).catch(console.error);
+    vegaEmbed('#hospital_heatmap', specHeatmap, embedOpt).catch(console.error);
+    vegaEmbed('#bubble_plot', specBubble, embedOpt).catch(console.error);
+    vegaEmbed('#std_dumbbell', specDumbbell, embedOpt).catch(console.error);
   </script>
 
 </body>
