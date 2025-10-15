@@ -23,7 +23,7 @@
 
   "data": {
     "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179-Assignment-2/main/Number%20of%20Cases%20of%20Infectious%20Diseases%20v2.csv",
-    "format": { "type": "csv" }
+    "format": { "type": "csv", "parse": { "Year": "number" } }
   },
 
   "transform": [
