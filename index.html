@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Import Vega & Vega-Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
+
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+
+  <style>
+    /* Force vertical stacking and centering of charts */
+    #choropleth_map, #bubble_plot {
+      display: block;   
+      clear: both;      
+      margin: 40px auto; 
+      max-width: 900px;
+    }
+
+    /* Title styling */
+    h1 {
+      text-align: center !important;
+      color: black !important;
+      margin-bottom: 40px !important;
+      display: block !important;
+      position: relative !important;
+      z-index: 10 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page Title -->
+  <h1>Healthcare Access and Disease Trends in Malaysia</h1>
+
+  <!-- Chart containers -->
+  <div id="choropleth_map"></div>
+  <div id="bubble_plot"></div>
+
+  <script type="text/javascript">
+    // Choropleth map
+    var spec1 = "healthcare_staff_choropleth_map.vg.json";
+    vegaEmbed('#choropleth_map', spec1)
+      .then(function(result) {
+        // result.view is the Vega view instance
+      }).catch(console.error);
+
+    // Infectious disease bubble plot
+    var spec2 = "infectious_disease_bubble_plot.vg.json";
+    vegaEmbed('#bubble_plot', spec2)
+      .then(function(result) {
+        // result.view is the Vega view instance
+      }).catch(console.error);
+  </script>
+
+</body>
+</html>
