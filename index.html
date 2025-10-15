@@ -6,14 +6,14 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
 
-  <!-- (Optional) your page-wide CSS -->
   <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
 
   <style>
     :root {
       --chart-max-width: 900px;
       --col-gap: 28px;   /* gap between columns */
-      --row-gap: 80px;   /* increased gap between rows */
+      --row-gap: 80px;   /* gap between ROWS of charts (kept large) */
+      --title-tighten: 14px; /* how much to pull cards up under titles */
     }
 
     body {
@@ -24,10 +24,9 @@
     h1 {
       text-align: center;
       color: #111;
-      margin: 28px 12px 32px; /* more space below main title */
+      margin: 28px 12px 40px; /* extra space below main title */
     }
 
-    /* Dashboard grid: 2 columns on desktop, 1 col on small screens */
     .dashboard {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -46,22 +45,22 @@
       }
     }
 
-    /* Row titles that span both columns */
+    /* Row titles */
     .row-title {
       grid-column: 1 / -1;
-      margin: 8px 2px 8px;
+      margin: 6px 2px 0;   /* smaller bottom margin */
       font-size: 22px;
       line-height: 1.3;
       color: #111;
       font-weight: 700;
-      text-align: center;   /* centered */
-      justify-self: center; /* ensure centering in grid */
+      text-align: center;
     }
 
-    /* Wrapper for each chart + caption */
+    /* Pull the first row of cards closer to the title above */
+    .tight-above { margin-top: calc(-1 * var(--title-tighten)); }
+
     .tile { display: flex; flex-direction: column; }
 
-    /* Chart card */
     .chart {
       background: #fff;
       border-radius: 10px;
@@ -69,10 +68,8 @@
       padding: 10px;
     }
 
-    /* Make embeds responsive to container width */
     .chart .vega-embed { width: 100%; }
 
-    /* Captions outside the card */
     .caption {
       margin: 10px 2px 0;
       font-size: 16px;
@@ -90,15 +87,15 @@
     <!-- Row 1 title -->
     <h2 class="row-title">Healthcare Analysis By State</h2>
 
-    <!-- Row 1 charts -->
-    <div class="tile">
+    <!-- Row 1 charts (tightened under the title) -->
+    <div class="tile tight-above">
       <div id="choropleth_map" class="chart"></div>
       <p class="caption">
         Kuala Lumpur has by far the highest density—913 staff per 100k, nearly 3× Selangor’s 324 (the lowest). Small territories also rank high, e.g., Perlis 712.
       </p>
     </div>
 
-    <div class="tile">
+    <div class="tile tight-above">
       <div id="hospital_heatmap" class="chart"></div>
       <p class="caption">
         Selangor and W.P. Kuala Lumpur consistently have the most facilities, while Perlis/Labuan/Putrajaya stay near zero; most states dip around 2020 and rebound by 2021.
@@ -108,15 +105,15 @@
     <!-- Row 2 title -->
     <h2 class="row-title">Infectious Disease Trends & Changes</h2>
 
-    <!-- Row 2 charts -->
-    <div class="tile">
+    <!-- Row 2 charts (tightened under the title) -->
+    <div class="tile tight-above">
       <div id="bubble_plot" class="chart"></div>
       <p class="caption">
         Food poisoning dominates every year (spikes in 2007–2008 and 2014–2016); all diseases dip sharply in 2020–2021; cholera nearly vanished in 2017 (2 cases).
       </p>
     </div>
 
-    <div class="tile">
+    <div class="tile tight-above">
       <div id="std_dumbbell" class="chart"></div>
       <p class="caption">
         2017→2022, syphilis surged nationwide (2,591 → 4,669; +80%), with big jumps in Pulau Pinang (85 → 455), Selangor (664 → 1,161) and W.P. Kuala Lumpur (320 → 523).
@@ -124,17 +121,14 @@
     </div>
   </div>
 
-  <script type="text/javascript">
-    // File paths for your Vega/Vega-Lite specs
+  <script>
     const specChoropleth = "healthcare_staff_choropleth_map.vg.json";
     const specHeatmap    = "hospital_facilities_heatmap.vg.json";
     const specBubble     = "infectious_disease_bubble_plot.vg.json";
     const specDumbbell   = "std_dumbell_chart.vg.json";
 
-    // Consistent embed options
     const embedOpt = { actions: false, renderer: "svg" };
 
-    // Embed charts
     vegaEmbed('#choropleth_map', specChoropleth, embedOpt).catch(console.error);
     vegaEmbed('#hospital_heatmap', specHeatmap, embedOpt).catch(console.error);
     vegaEmbed('#bubble_plot', specBubble, embedOpt).catch(console.error);
