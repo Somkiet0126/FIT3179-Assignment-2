@@ -1,39 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Healthcare Access and Disease Trends in Malaysia</title>
-
   <!-- Vega & Vega-Lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
 
+  <!-- (Optional) your page-wide CSS -->
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+
   <style>
     :root {
-      --chart-max-width: 820px;   /* width of each card on desktop */
-      --chart-max-height: 600px;  /* clamp chart drawing area height */
-      --gap: 24px;                /* gap between cards */
-      --card-pad: 12px;
+      --chart-max-width: 900px;
+      --gap: 28px;
     }
 
-    /* Layout */
-    html, body { margin: 0; padding: 0; overflow-x: hidden; }
     body {
+      margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: #111;
-      background: #fafafa;
     }
 
     h1 {
       text-align: center;
-      margin: 28px 12px 16px;
-      font-weight: 650;
-      letter-spacing: 0.2px;
+      color: #111;
+      margin: 28px 12px 12px;
     }
 
+    /* Dashboard grid: 2 columns on desktop, 1 col on small screens */
     .dashboard {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -51,28 +44,17 @@
       }
     }
 
-    /* Card / container for each chart */
+    /* Chart containers */
     .chart {
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-      padding: var(--card-pad);
-      max-width: var(--chart-max-width);
-      /* Give a bit more than chart max height to accommodate title/legend paddings */
-      max-height: calc(var(--chart-max-height) + 40px);
-      overflow: hidden; /* prevent legends/titles from pushing the card larger */
+      padding: 10px; /* small padding so embedded charts aren’t flush */
     }
 
-    /* Ensure embeds fill width and stay within height cap */
+    /* Make embeds responsive to container width */
     .chart .vega-embed {
       width: 100%;
-    }
-    .chart .vega-embed canvas,
-    .chart .vega-embed svg {
-      width: 100% !important;
-      max-height: var(--chart-max-height) !important;
-      height: auto !important;
-      display: block;
     }
   </style>
 </head>
@@ -90,58 +72,21 @@
     <div id="std_dumbbell" class="chart"></div>
   </div>
 
-  <script>
-    // Paths to your Vega/Vega-Lite specs
-    const specs = {
-      choropleth: "healthcare_staff_choropleth_map.vg.json",
-      heatmap:    "hospital_facilities_heatmap.vg.json",
-      bubble:     "infectious_disease_bubble_plot.vg.json",
-      dumbbell:   "std_dumbell_chart.vg.json"
-    };
+  <script type="text/javascript">
+    // File paths for your Vega/Vega-Lite specs
+    const specChoropleth = "healthcare_staff_choropleth_map.vg.json";
+    const specHeatmap    = "hospital_facilities_heatmap.vg.json";
+    const specBubble     = "infectious_disease_bubble_plot.vg.json";
+    const specDumbbell   = "std_dumbell_chart.vg.json";
 
-    const embedOptions = { actions: false, renderer: "canvas" };
-    const MAX_H = parseInt(getComputedStyle(document.documentElement)
-                  .getPropertyValue('--chart-max-height')) || 600;
+    // Optional: consistent embed options
+    const embedOpt = { actions: false, renderer: "canvas" };
 
-    // Load a spec, clamp height, make it container-width responsive, then embed
-    async function loadAndCap(selector, url) {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
-      const spec = await res.json();
-
-      // Make charts responsive to container width and respect a max height
-      spec.width = "container";
-      spec.autosize = { type: "fit", contains: "padding", resize: true };
-
-      // Clamp or default height
-      if (typeof spec.height === "number") {
-        spec.height = Math.min(spec.height, MAX_H);
-      } else {
-        spec.height = MAX_H;
-      }
-
-      // Optional: keep legends consistent (helps equalize final card heights)
-      spec.config = spec.config || {};
-      spec.config.legend = Object.assign({ orient: "right", direction: "vertical" }, spec.config.legend || {});
-
-      return vegaEmbed(selector, spec, embedOptions);
-    }
-
-    // Embed all four charts
-    Promise.all([
-      loadAndCap('#choropleth_map',  specs.choropleth),
-      loadAndCap('#hospital_heatmap',specs.heatmap),
-      loadAndCap('#bubble_plot',     specs.bubble),
-      loadAndCap('#std_dumbbell',    specs.dumbbell)
-    ]).catch(err => {
-      console.error(err);
-      // Optional: show a friendly message in the page if something fails
-      document.querySelectorAll('.chart').forEach(el => {
-        if (!el.querySelector('.vega-embed')) {
-          el.innerHTML = '<div style="padding:10px;color:#b91c1c;">Failed to load chart.</div>';
-        }
-      });
-    });
+    // Embed charts
+    vegaEmbed('#choropleth_map', specChoropleth, embedOpt).catch(console.error);
+    vegaEmbed('#hospital_heatmap', specHeatmap, embedOpt).catch(console.error);
+    vegaEmbed('#bubble_plot', specBubble, embedOpt).catch(console.error);
+    vegaEmbed('#std_dumbbell', specDumbbell, embedOpt).catch(console.error);
   </script>
 
 </body>
