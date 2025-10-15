@@ -15,7 +15,7 @@
   ],
 
   "width": "container",
-  "height": 600,
+  "height": 670,
   "autosize": { "type": "fit", "contains": "padding" },
   "padding": { "right": 20 },
 
