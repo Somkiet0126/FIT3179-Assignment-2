@@ -10,7 +10,7 @@
   "width": 900,
   "height": 600,
   "data": {
-    "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179/main/std_state.csv",
+    "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179-Assignment-2/main/std_state.csv",
     "format": {
       "type": "csv",
       "parse": {"cases": "number", "incidence": "number"}
