@@ -10,14 +10,17 @@
 
   <style>
     :root{
-      /* Narrower cards and more gap so nothing feels cramped */
       --card-max-width: 540px;
       --col-gap: 48px;
       --row-gap: 80px;
       --title-tighten: 14px;
     }
 
-    body{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+    body{
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background-color: #f5f5f5; /* ✅ Light gray background */
+    }
 
     h1{ text-align:center; color:#111; margin:28px 12px 40px; }
 
@@ -50,7 +53,6 @@
       padding:10px; overflow:hidden;
     }
 
-    /* Let the SVG fill the card width cleanly */
     .chart .vega-embed,
     .chart .vega-embed > svg,
     .chart .vega-embed svg{
@@ -70,10 +72,8 @@
   <h1>Healthcare Access and Disease Trends in Malaysia</h1>
 
   <div class="dashboard">
-    <!-- Row 1 title -->
     <h2 class="row-title">Healthcare Analysis By State</h2>
 
-    <!-- Row 1 -->
     <div class="tile tight-above">
       <div id="choropleth_map" class="chart"></div>
       <p class="caption">
@@ -88,10 +88,8 @@
       </p>
     </div>
 
-    <!-- Row 2 title -->
     <h2 class="row-title">Infectious Disease Trends & Changes</h2>
 
-    <!-- Row 2 -->
     <div class="tile tight-above">
       <div id="bubble_plot" class="chart"></div>
       <p class="caption">
@@ -108,16 +106,13 @@
   </div>
 
   <script>
-    // Spec files
     const specChoropleth = "healthcare_staff_choropleth_map.vg.json";
     const specHeatmap    = "hospital_facilities_heatmap.vg.json";
     const specBubble     = "infectious_disease_bubble_plot.vg.json";
     const specDumbbell   = "std_dumbell_chart.vg.json";
 
-    // Base options
     const baseOpt = { actions:false, renderer:"svg" };
 
-    // Helper: force width to container + fit autosize, with a chosen height
     const optWithHeight = (h) => ({
       ...baseOpt,
       patch: (spec) => ({
@@ -128,7 +123,6 @@
       })
     });
 
-    // Embed with per-chart heights
     vegaEmbed("#choropleth_map",  specChoropleth, optWithHeight(420)).catch(console.error);
     vegaEmbed("#hospital_heatmap", specHeatmap,   optWithHeight(420)).catch(console.error);
     vegaEmbed("#bubble_plot",      specBubble,    optWithHeight(485)).catch(console.error);
