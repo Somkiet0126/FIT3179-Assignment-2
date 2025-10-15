@@ -17,8 +17,9 @@
   "width": "container",
   "height": 600,
   "autosize": { "type": "fit", "contains": "padding" },
+  "padding": { "right": 20 },
 
-  "title": "Incidence Rate vs Number of Infectious Disease Cases by Year",
+  "title": ["Incidence Rate vs Number of", "Infectious Disease Cases by Year"],
 
   "data": {
     "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179-Assignment-2/main/Number%20of%20Cases%20of%20Infectious%20Diseases%20v2.csv",
@@ -37,7 +38,13 @@
           "field": "Year",
           "type": "ordinal",
           "title": "Year",
-          "axis": { "labelAngle": 0, "grid": true, "gridColor": "#e5e7eb", "gridWidth": 0.8, "tickBand": "center" }
+          "axis": {
+            "labelAngle": 0,
+            "grid": true,
+            "gridColor": "#e5e7eb",
+            "gridWidth": 0.8,
+            "tickBand": "center"
+          }
         },
         "y": {
           "field": "Incidence Rate",
@@ -65,22 +72,38 @@
     {
       "data": {
         "values": [
-          { "Infectious Diseases": "Cholera", "Year": "2001", "Incidence Rate": 2.3, "text": "Peak outbreak in 2001" },
-          { "Infectious Diseases": "Cholera", "Year": "2017", "Incidence Rate": 0, "text": "Almost eradicated" },
-          { "Infectious Diseases": "Dysentry", "Year": "2000", "Incidence Rate": 1.9, "text": "Early 2000s peak" },
-          { "Infectious Diseases": "Dysentry", "Year": "2021", "Incidence Rate": 0.6, "text": "Gradual resurgence" },
-          { "Infectious Diseases": "Food poisoning", "Year": "2008", "Incidence Rate": 62.5, "text": "Highest recorded spike" },
-          { "Infectious Diseases": "Food poisoning", "Year": "2021", "Incidence Rate": 18.4, "text": "Decline after 2020" },
-          { "Infectious Diseases": "Typhoid", "Year": "2005", "Incidence Rate": 4.1, "text": "Major spike in 2005" },
-          { "Infectious Diseases": "Typhoid", "Year": "2021", "Incidence Rate": 0.3, "text": "Reduced cases" },
-          { "Infectious Diseases": "Viral Hepatitis A", "Year": "2000", "Incidence Rate": 2.1, "text": "2000 high cases" },
-          { "Infectious Diseases": "Viral Hepatitis A", "Year": "2018", "Incidence Rate": 0.3, "text": "Low due to vaccination" }
+          
+          { "Infectious Diseases": "Cholera", "Year": 2012, "Incidence Rate": 1.0, "text": "Higher early 2010s" },
+          { "Infectious Diseases": "Cholera", "Year": 2017, "Incidence Rate": 0.0, "text": "Near zero in 2017" },
+
+          
+          { "Infectious Diseases": "Dysentry", "Year": 2019, "Incidence Rate": 0.7, "text": "2019 peak" },
+
+          
+          { "Infectious Diseases": "Food poisoning", "Year": 2014, "Incidence Rate": 58.6, "text": "Highest in 2014" },
+          { "Infectious Diseases": "Food poisoning", "Year": 2021, "Incidence Rate": 18.4, "text": "Pandemic low" },
+
+          
+          { "Infectious Diseases": "Typhoid", "Year": 2015, "Incidence Rate": 1.4, "text": "Spike in 2015" },
+          { "Infectious Diseases": "Typhoid", "Year": 2020, "Incidence Rate": 0.2, "text": "2020 low" },
+
+      
+          { "Infectious Diseases": "Viral Hepatitis A", "Year": 2012, "Incidence Rate": 1.6, "text": "High in 2012" },
+          { "Infectious Diseases": "Viral Hepatitis A", "Year": 2021, "Incidence Rate": 0.1, "text": "Very low by 2021" }
         ]
       },
       "transform": [
         { "filter": "datum['Infectious Diseases'] == disease_selection" }
       ],
-      "mark": { "type": "text", "align": "left", "dx": 10, "dy": -25, "fontSize": 12, "fontWeight": "bold", "color": "black" },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "dy": -20,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "black"
+      },
       "encoding": {
         "x": { "field": "Year", "type": "ordinal" },
         "y": { "field": "Incidence Rate", "type": "quantitative" },
@@ -91,6 +114,6 @@
 
   "config": {
     "title": { "fontSize": 18, "font": "Times New Roman", "anchor": "middle" },
-    "axis": { "labelFontSize": 9, "titleFontSize": 14 }
+    "axis": { "labelFontSize": 11, "titleFontSize": 14 }
   }
 }
