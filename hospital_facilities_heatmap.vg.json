@@ -7,48 +7,55 @@
     "font": "Times New Roman",
     "anchor": "middle"
   },
-  "width": 600,
+
+  "width": "container",
   "height": 600,
+  "autosize": { "type": "fit", "contains": "padding" },
+
   "data": {
     "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179-Assignment-2/main/Number-of-private-hospitals-nursing-and-maternity-homes-state.csv",
-    "format": {"type": "csv"}
+    "format": { "type": "csv" }
   },
+
   "transform": [
     {
       "calculate": "toNumber(datum['No. of Private Hospitals, Nursing and Maternity Homes'])",
       "as": "count"
     },
-    {"calculate": "trim(datum.State)", "as": "StateClean"}
+    { "calculate": "trim(datum.State)", "as": "StateClean" }
   ],
-  "mark": {"type": "rect", "stroke": "#ffffff", "strokeWidth": 0.5},
+
+  "mark": { "type": "rect", "stroke": "#ffffff", "strokeWidth": 0.5 },
+
   "encoding": {
     "x": {
       "field": "Year",
       "type": "ordinal",
       "title": "Year",
-      "axis": {"labelAngle": 0, "tickBand": "center", "grid": false}
+      "axis": { "labelAngle": 0, "tickBand": "center", "grid": false }
     },
     "y": {
       "field": "StateClean",
       "type": "nominal",
       "title": "State",
       "sort": "ascending",
-      "axis": {"labelLimit": 170}
+      "axis": { "labelLimit": 170 }
     },
     "color": {
       "field": "count",
       "type": "quantitative",
       "title": "Total Facilities",
-      "scale": {"scheme": "blues"}
+      "scale": { "scheme": "blues" }
     },
     "tooltip": [
-      {"field": "StateClean", "title": "State"},
-      {"field": "Year", "title": "Year"},
-      {"field": "count", "type": "quantitative", "title": "Total Facilities"}
+      { "field": "StateClean", "title": "State" },
+      { "field": "Year", "title": "Year" },
+      { "field": "count", "type": "quantitative", "title": "Total Facilities" }
     ]
   },
+
   "config": {
-    "axis": {"labelFontSize": 11, "titleFontSize": 12},
-    "view": {"stroke": null}
+    "axis": { "labelFontSize": 11, "titleFontSize": 12 },
+    "view": { "stroke": null }
   }
 }
