@@ -3,7 +3,7 @@
   "title": {
     "text": "Private Hospitals, Nursing & Maternity Homes Accessibility in Malaysia",
     "subtitle": "Counts by state and year",
-    "fontSize": 18,
+    "fontSize": 14,
     "font": "Times New Roman",
     "anchor": "middle"
   },
@@ -43,7 +43,7 @@
       "type": "quantitative",
       "title": "Total Facilities",
       "scale": { "scheme": "blues" },
-      "legend": { "titleFontSize": 11 }
+      "legend": { "titleFontSize": 9 }
     },
     "tooltip": [
       { "field": "StateClean", "title": "State" },
