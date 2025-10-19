@@ -1,7 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 900,
+  "width": "container",
   "height": 600,
+  "autosize": { "type": "fit", "contains": "padding" },
   "title": {
     "text": ["Healthcare Staff per 100,000 People", "by State in Malaysia (2022)"],
     "font": "Arial",
@@ -98,10 +99,7 @@
     {
       "data": {
         "values": [
-          {
-            "label_lon": 102.15, "label_lat": 3.36,
-            "note": "Kuala Lumpur (913) — Many hospitals and federal facilities raise staff per person."
-          }
+          { "label_lon": 102.15, "label_lat": 3.36, "note": "Kuala Lumpur (913) — Many hospitals and federal facilities raise staff per person." }
         ]
       },
       "mark": { "type": "text", "font": "Arial", "fontSize": 11, "fontWeight": "bold", "align": "left", "baseline": "middle", "fill": "#222" },
@@ -114,10 +112,7 @@
     {
       "data": {
         "values": [
-          {
-            "label_lon": 100.65, "label_lat": 6.50,
-            "note": "Perlis (712) — Small population makes staff ratio look high."
-          }
+          { "label_lon": 100.65, "label_lat": 6.50, "note": "Perlis (712) — Small population makes staff ratio look high." }
         ]
       },
       "mark": { "type": "text", "font": "Arial", "fontSize": 11, "fontWeight": "bold", "align": "left", "baseline": "middle", "dx": 3, "fill": "#222" },
@@ -130,10 +125,7 @@
     {
       "data": {
         "values": [
-          {
-            "label_lon": 115.0, "label_lat": 6.0,
-            "note": "Sabah (435) — Large, spread-out areas make staff coverage thinner."
-          }
+          { "label_lon": 115.0, "label_lat": 6.0, "note": "Sabah (435) — Large, spread-out areas make staff coverage thinner." }
         ]
       },
       "mark": { "type": "text", "font": "Arial", "fontSize": 11, "fontWeight": "bold", "align": "right", "baseline": "middle", "fill": "#222" },
