@@ -1,0 +1,262 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": [
+      "Hospital Beds in Malaysia by Type (2015–2022)",
+      "Stacked Bars (MOH vs Non-MOH vs Special Institutions)"
+    ],
+    "anchor": "middle",
+    "frame": "bounds",
+    "font": "Segoe UI",
+    "fontSize": 17,
+    "fontWeight": "bold",
+    "align": "center",
+    "offset": 20
+  },
+  "width": 900,
+  "height": 540,
+  "autosize": {"type": "fit", "contains": "padding"},
+  "padding": {"right": 20},
+  "data": {
+    "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179-Assignment-2/main/hospital_beds.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {"filter": "datum.state === 'Malaysia' && datum.district === 'All'"},
+    {"calculate": "toNumber(datum.beds)", "as": "bedsNum"},
+    {"calculate": "year(toDate(datum.date))", "as": "YearNum"},
+    {
+      "calculate": "datum.type === 'hospital_moh' ? 'MOH Hospitals' : datum.type === 'hospital_non_moh' ? 'Non-MOH Hospitals' : datum.type === 'special_medical_institution' ? 'Special Medical Institution' : datum.type",
+      "as": "TypeLabel"
+    },
+    {
+      "calculate": "datum.type === 'hospital_moh' ? 0 : datum.type === 'hospital_non_moh' ? 1 : datum.type === 'special_medical_institution' ? 2 : 99",
+      "as": "TypeOrder"
+    }
+  ],
+  "layer": [
+    {
+      "transform": [{"filter": "datum.type !== 'all'"}],
+      "mark": {"type": "bar"},
+      "encoding": {
+        "x": {
+          "field": "YearNum",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": {"labelAngle": 0, "grid": true},
+          "scale": {"paddingInner": 0.4, "paddingOuter": 0.2}
+        },
+        "y": {
+          "aggregate": "sum",
+          "field": "bedsNum",
+          "type": "quantitative",
+          "title": "Beds",
+          "stack": "zero",
+          "scale": {"domain": [0, 55000]},
+          "axis": {
+            "values": [
+              0,
+              5000,
+              10000,
+              15000,
+              20000,
+              25000,
+              30000,
+              35000,
+              40000,
+              45000,
+              50000
+            ]
+          }
+        },
+        "color": {
+          "field": "TypeLabel",
+          "type": "nominal",
+          "title": "Facility Type",
+          "scale": {
+            "domain": [
+              "MOH Hospitals",
+              "Non-MOH Hospitals",
+              "Special Medical Institution"
+            ],
+            "range": ["#d62728", "#FFBF00", "#0096FF"]
+          },
+          "legend": {"orient": "right"}
+        },
+        "order": {"field": "TypeOrder", "type": "ordinal"},
+        "tooltip": [
+          {"field": "YearNum", "title": "Year"},
+          {"field": "TypeLabel", "title": "Type"},
+          {
+            "aggregate": "sum",
+            "field": "bedsNum",
+            "type": "quantitative",
+            "title": "Beds",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "datum.type === 'all'"}],
+      "mark": {
+        "type": "text",
+        "font": "Segoe UI",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "fill": "#333",
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -4
+      },
+      "encoding": {
+        "x": {"field": "YearNum", "type": "ordinal"},
+        "y": {"aggregate": "sum", "field": "bedsNum", "type": "quantitative"},
+        "text": {
+          "aggregate": "sum",
+          "field": "bedsNum",
+          "type": "quantitative",
+          "format": ","
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "font": "Segoe UI",
+        "fontSize": 10,
+        "fill": "#000",
+        "align": "right",
+        "baseline": "bottom",
+        "dx": -6
+      },
+      "encoding": {
+        "x": {"value": 810},
+        "y": {"value": -5},
+        "text": {"value": "MOH = Ministry of Health"}
+      }
+    },
+    {
+      "transform": [
+        {"filter": "datum.type !== 'all'"},
+        {"filter": "datum.YearNum == 2021"},
+        {
+          "aggregate": [{"op": "sum", "field": "bedsNum", "as": "beds"}],
+          "groupby": ["YearNum", "TypeLabel", "TypeOrder"]
+        },
+        {
+          "stack": "beds",
+          "groupby": ["YearNum"],
+          "sort": [{"field": "TypeOrder", "order": "ascending"}],
+          "as": ["y0", "y1"]
+        },
+        {"filter": "datum.TypeLabel == 'Non-MOH Hospitals'"},
+        {"calculate": "datum.y1 - 800", "as": "ruleStartY"},
+        {"calculate": "datum.y1 - 600", "as": "ruleEndY"}
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "color": "#333333",
+            "strokeWidth": 1.5,
+            "x2Offset": 125,
+            "zindex": 9
+          },
+          "encoding": {
+            "x": {"field": "YearNum", "type": "ordinal"},
+            "y": {"field": "ruleStartY", "type": "quantitative"},
+            "x2": {"field": "YearNum", "type": "ordinal"},
+            "y2": {"field": "ruleEndY", "type": "quantitative"}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "middle",
+            "fontSize": 10,
+            "fontWeight": "bold",
+            "fill": "#000",
+            "dx": 130
+          },
+          "encoding": {
+            "x": {"field": "YearNum", "type": "ordinal"},
+            "y": {"field": "ruleEndY", "type": "quantitative"},
+            "text": {
+              "value": [
+                "During COVID-19 era,",
+                "largest yearly increase in",
+                "Non-MOH hospital beds (+744)"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "transform": [
+        {"filter": "datum.type !== 'all'"},
+        {"filter": "datum.YearNum == 2022"},
+        {
+          "aggregate": [{"op": "sum", "field": "bedsNum", "as": "beds"}],
+          "groupby": ["YearNum", "TypeLabel", "TypeOrder"]
+        },
+        {
+          "stack": "beds",
+          "groupby": ["YearNum"],
+          "sort": [{"field": "TypeOrder", "order": "ascending"}],
+          "as": ["y0", "y1"]
+        },
+        {"filter": "datum.TypeLabel == 'MOH Hospitals'"},
+        {"calculate": "datum.y1 - 800", "as": "ruleStartY"},
+        {"calculate": "datum.y1 - 3000", "as": "ruleEndY"}
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "color": "#333333",
+            "strokeWidth": 1.5,
+            "x2Offset": 55,
+            "zindex": 9
+          },
+          "encoding": {
+            "x": {"field": "YearNum", "type": "ordinal"},
+            "y": {"field": "ruleStartY", "type": "quantitative"},
+            "x2": {"field": "YearNum", "type": "ordinal"},
+            "y2": {"field": "ruleEndY", "type": "quantitative"}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "middle",
+            "fontSize": 10,
+            "fontWeight": "bold",
+            "fill": "#000",
+            "dy": 10,
+            "dx": 63
+          },
+          "encoding": {
+            "x": {"field": "YearNum", "type": "ordinal"},
+            "y": {"field": "ruleEndY", "type": "quantitative"},
+            "text": {
+              "value": [
+                "MOH hospitals show steady",
+                "annual growth in bed",
+                "capacity — increasing by",
+                "3,134 beds since 2015"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "axis": {"labelFontSize": 11, "titleFontSize": 13},
+    "view": {"stroke": null}
+  }
+}
