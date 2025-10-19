@@ -17,7 +17,7 @@
   "width": "container",
   "height": 670,
   "autosize": { "type": "fit", "contains": "padding" },
-  "padding": { "right": 30 },
+  "padding": { "right": 10 },
 
   "title": {
     "text": ["Incidence Rate vs Number of", "Infectious Disease Cases by Year"],
