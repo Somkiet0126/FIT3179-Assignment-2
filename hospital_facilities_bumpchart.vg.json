@@ -2,12 +2,12 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": [
-      "Private Hospitals, Nursing & Maternity Homes by State (2018 - 2021)",
+      "Private Hospitality Facilites by State (2018 - 2021)",
       "Rank Trajectories (Higher = More Facilities)"
     ],
     "anchor": "middle",
     "font": "Arial",
-    "fontSize": 18
+    "fontSize": 17
   },
   "width": "container",
   "height": 540,
@@ -149,7 +149,7 @@
           "mark": {
             "type": "text",
             "font": "Arial",
-            "fontSize": 11,
+            "fontSize": 10,
             "align": "left",
             "baseline": "bottom",
             "dy": -10,
@@ -167,7 +167,7 @@
           "mark": {
             "type": "text",
             "font": "Arial",
-            "fontSize": 11,
+            "fontSize": 10,
             "align": "left",
             "baseline": "top",
             "dy": -10,
