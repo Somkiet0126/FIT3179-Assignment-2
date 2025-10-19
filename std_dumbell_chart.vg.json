@@ -7,11 +7,14 @@
   "padding": { "right": 20 },
 
   "title": {
-    "text": ["STD in Malaysia — State Change", "Between Two Years"],
+    "text": ["STD in Malaysia", "State Change Between Two Years"],
     "subtitle": "Select disease, metric, and two years to compare",
-    "fontSize": 18,
-    "font": "Times New Roman",
-    "anchor": "middle"
+    "fontSize": 17,
+    "font": "Segoe UI",
+    "subtitleFont": "Segoe UI",
+    "anchor": "middle",
+    "frame": "bounds",
+    "offset": 20
   },
 
   "data": {
@@ -124,7 +127,7 @@
   ],
 
   "config": {
-    "axis": { "labelFontSize": 11, "titleFontSize": 12 },
+    "axis": { "labelFont": "Segoe UI", "titleFont": "Segoe UI", "labelFontSize": 11, "titleFontSize": 13 },
     "axisY": { "title": "State", "titlePadding": 10 },
     "view": { "stroke": null }
   }
