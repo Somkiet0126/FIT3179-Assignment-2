@@ -121,7 +121,7 @@
     </div>
 
     <div class="tile tight-above">
-      <div id="hospital_heatmap" class="chart"></div>
+      <div id="hospital_bumpchart" class="chart"></div>
       <p class="caption">
         Selangor and W.P. Kuala Lumpur consistently have the most facilities, while Perlis/Labuan/Putrajaya stay near zero; most states dip around 2020 and rebound by 2021.
       </p>
@@ -146,7 +146,7 @@
 
   <script>
     const specChoropleth = "healthcare_staff_choropleth_map.vg.json";
-    const specHeatmap    = "hospital_facilities_heatmap.vg.json";
+    const specBumpChart    = "hospital_facilities_bumpchart.vg.json";
     const specBubble     = "infectious_disease_bubble_plot.vg.json";
     const specDumbbell   = "std_dumbell_chart.vg.json";
 
@@ -163,7 +163,7 @@
     });
 
     vegaEmbed("#choropleth_map",  specChoropleth, optWithHeight(420)).catch(console.error);
-    vegaEmbed("#hospital_heatmap", specHeatmap,   optWithHeight(420)).catch(console.error);
+    vegaEmbed("#hospital_bumpchart", specBumpChart,   optWithHeight(420)).catch(console.error);
     vegaEmbed("#bubble_plot",      specBubble,    optWithHeight(485)).catch(console.error);
     vegaEmbed("#std_dumbbell",     specDumbbell,  optWithHeight(420)).catch(console.error);
   </script>
