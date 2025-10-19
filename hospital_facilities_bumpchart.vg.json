@@ -7,7 +7,7 @@
     ],
     "anchor": "middle",
     "frame": "bounds",           
-    "font": "Arial",
+    "font": "Segoe UI",
     "fontSize": 17,
     "fontWeight": "bold",                
     "align": "center"
