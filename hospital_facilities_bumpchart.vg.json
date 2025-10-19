@@ -1,0 +1,193 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": [
+      "Private Hospitals, Nursing & Maternity Homes by State (2018 - 2021)",
+      "Rank Trajectories (Higher = More Facilities)"
+    ],
+    "anchor": "middle",
+    "font": "Arial",
+    "fontSize": 18
+  },
+  "width": "container",
+  "height": 540,
+  "autosize": { "type": "fit", "contains": "padding" },
+  "padding": { "right": 20 },
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179-Assignment-2/main/Number-of-private-hospitals-nursing-and-maternity-homes-state.csv",
+    "format": { "type": "csv" }
+  },
+
+  "transform": [
+    { "calculate": "toNumber(datum['No. of Private Hospitals, Nursing and Maternity Homes'])", "as": "count" },
+    { "calculate": "trim(datum.State)", "as": "StateClean" },
+    { "calculate": "toNumber(datum.Year)", "as": "YearNum" },
+    { "filter": "datum.YearNum >= 2018 && datum.YearNum <= 2021" },
+    {
+      "window": [{ "op": "rank", "as": "rank" }],
+      "sort": [{ "field": "count", "order": "descending" }],
+      "groupby": ["YearNum"]
+    },
+    { "joinaggregate": [{ "op": "max", "field": "YearNum", "as": "maxYear" }] }
+  ],
+
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "hl",
+          "select": { "type": "point", "fields": ["StateClean"], "on": "mouseover", "clear": "mouseout" }
+        }
+      ],
+      "mark": { "type": "line" },
+      "encoding": {
+        "x": {
+          "field": "YearNum",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": { "labelAngle": 0, "grid": true },
+          "sort": "ascending"
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "title": "Rank (1 = most facilities)",
+          "scale": { "reverse": true, "domain": [0, 17] },
+          "axis": {
+            "values": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+            "tickCount": 17,
+            "grid": true,
+            "domain": true
+          }
+        },
+        "detail": { "field": "StateClean" },
+        "color": {
+          "condition": [
+            { "test": "datum.StateClean === 'Selangor'", "value": "#d62728" },
+            { "test": "datum.StateClean === 'W.P. Labuan'", "value": "#ffbf00" }
+          ],
+          "value": "#7a7a7a"
+        },
+        "size": {
+          "condition": [
+            { "test": "datum.StateClean === 'Selangor' || datum.StateClean === 'W.P. Labuan'", "value": 3.6 },
+            { "param": "hl", "empty": false, "value": 4.4 }
+          ],
+          "value": 2.2
+        },
+        "opacity": {
+          "condition": { "param": "hl", "empty": false, "value": 1 },
+          "value": 0.55
+        },
+        "tooltip": [
+          { "field": "StateClean", "title": "State" },
+          { "field": "YearNum", "title": "Year" },
+          { "field": "count", "type": "quantitative", "title": "Total Facilities" },
+          { "field": "rank", "type": "quantitative", "title": "Rank" }
+        ]
+      }
+    },
+
+    {
+      "mark": { "type": "point", "filled": true },
+      "encoding": {
+        "x": { "field": "YearNum", "type": "ordinal", "sort": "ascending" },
+        "y": { "field": "rank", "type": "quantitative", "scale": { "reverse": true, "domain": [0,17] } },
+        "detail": { "field": "StateClean" },
+        "color": {
+          "condition": [
+            { "test": "datum.StateClean === 'Selangor'", "value": "#d62728" },
+            { "test": "datum.StateClean === 'W.P. Labuan'", "value": "#ffbf00" }
+          ],
+          "value": "#7a7a7a"
+        },
+        "size": { "value": 55 },
+        "opacity": {
+          "condition": { "param": "hl", "empty": false, "value": 1 },
+          "value": 0.85
+        }
+      }
+    },
+
+    {
+      "transform": [{ "filter": "datum.YearNum === datum.maxYear" }],
+      "mark": { "type": "text", "align": "left", "baseline": "middle", "dx": 6, "fontWeight": "bold" },
+      "encoding": {
+        "x": { "field": "YearNum", "type": "ordinal", "sort": "ascending" },
+        "y": { "field": "rank", "type": "quantitative", "scale": { "reverse": true, "domain": [0,17] } },
+        "text": { "field": "StateClean" },
+        "color": {
+          "condition": [
+            { "test": "datum.StateClean === 'Selangor'", "value": "#d62728" },
+            { "test": "datum.StateClean === 'W.P. Labuan'", "value": "#ffbf00" }
+          ],
+          "value": "#7a7a7a"
+        }
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "x": 2021,
+            "y": 1,
+            "bold": "Selangor ranks highest",
+            "normal": "due to large population\nand private healthcare demand."
+          },
+          {
+            "x": 2021,
+            "y": 16,
+            "bold": "Labuan ranks lowest",
+            "normal": "as a small island relying\non nearby Sabah or\npublic facilities."
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "font": "Arial",
+            "fontSize": 11,
+            "align": "left",
+            "baseline": "bottom",
+            "dy": -10,
+            "dx": 80,
+            "fill": "black",
+            "fontWeight": "bold"
+          },
+          "encoding": {
+            "x": { "field": "x", "type": "ordinal" },
+            "y": { "field": "y", "type": "quantitative", "scale": { "reverse": true } },
+            "text": { "field": "bold" }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "font": "Arial",
+            "fontSize": 11,
+            "align": "left",
+            "baseline": "top",
+            "dy": -10,
+            "dx": 80,
+            "fill": "black",
+            "lineBreak": "\n"
+          },
+          "encoding": {
+            "x": { "field": "x", "type": "ordinal" },
+            "y": { "field": "y", "type": "quantitative", "scale": { "reverse": true } },
+            "text": { "field": "normal" }
+          }
+        }
+      ]
+    }
+  ],
+
+  "config": {
+    "legend": { "disable": true },
+    "axis": { "labelFontSize": 11, "titleFontSize": 13 },
+    "view": { "stroke": null }
+  }
+}
