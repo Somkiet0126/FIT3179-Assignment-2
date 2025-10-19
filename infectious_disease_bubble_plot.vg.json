@@ -17,7 +17,7 @@
   "width": "container",
   "height": 670,
   "autosize": { "type": "fit", "contains": "padding" },
-  "padding": { "right": 10 },
+  "padding": { "right": 20 },
 
   "title": {
     "text": ["Incidence Rate vs Number of", "Infectious Disease Cases by Year"],
@@ -63,7 +63,7 @@
           "field": "Number of Cases",
           "type": "quantitative",
           "title": "Number of Cases",
-          "scale": { "range": [300, 1500] },
+          "scale": { "type": "sqrt", "range": [60, 1600], "zero": false },
           "legend": { "orient": "right", "titleFontSize": 12, "labelFontSize": 11 }
         },
         "color": { "value": "#3b82f6" },
