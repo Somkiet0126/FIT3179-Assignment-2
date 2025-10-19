@@ -85,13 +85,13 @@
           { "Infectious Diseases": "Dysentry", "Year": 2019, "Incidence Rate": 0.7, "text": "Pre-MCO outbreaks" },
 
           { "Infectious Diseases": "Food poisoning", "Year": 2014, "Incidence Rate": 58.6, "text": "Peak—restaurant/cluster outbreaks" },
-          { "Infectious Diseases": "Food poisoning", "Year": 2021, "Incidence Rate": 18.4, "text": "Pandemic curbs reduced exposure" },
+          { "Infectious Diseases": "Food poisoning", "Year": 2021, "Incidence Rate": 18.4, "text": ["Pandemic curbs", "reduced exposure" ]},
 
           { "Infectious Diseases": "Typhoid", "Year": 2015, "Incidence Rate": 1.4, "text": "Spike—localized outbreaks" },
           { "Infectious Diseases": "Typhoid", "Year": 2020, "Incidence Rate": 0.2, "text": "Record low—mobility limits" },
 
           { "Infectious Diseases": "Viral Hepatitis A", "Year": 2012, "Incidence Rate": 1.6, "text": "High—pre-vaccine uptake" },
-          { "Infectious Diseases": "Viral Hepatitis A", "Year": 2021, "Incidence Rate": 0.1, "text": "Very low—vaccination & hygiene" }
+          { "Infectious Diseases": "Viral Hepatitis A", "Year": 2021, "Incidence Rate": 0.1, "text": ["Very low—vaccination", "& hygiene"] }
         ]
       },
       "transform": [
@@ -117,7 +117,7 @@
 
   "config": {
     "title": { "font": "Segoe UI", "fontSize": 17, "anchor": "middle", "frame": "bounds" },
-    "axis": { "labelFont": "Segoe UI", "titleFont": "Segoe UI", "labelFontSize": 11, "titleFontSize": 14 },
+    "axis": { "labelFont": "Segoe UI", "titleFont": "Segoe UI", "labelFontSize": 11, "titleFontSize": 13 },
     "legend": { "labelFont": "Segoe UI", "titleFont": "Segoe UI" }
   }
 }
