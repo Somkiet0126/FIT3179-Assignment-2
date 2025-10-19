@@ -1,21 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-
-  "width": "container",
+  "width": 900,
   "height": 600,
-  "autosize": { "type": "fit", "contains": "padding" },
-
   "title": {
     "text": ["Healthcare Staff per 100,000 People", "by State in Malaysia (2022)"],
-    "font": "Times New Roman",
+    "font": "Arial",
     "fontSize": 18,
     "anchor": "middle"
   },
-
   "padding": { "top": 8, "right": 10, "bottom": 48, "left": 10 },
-
   "projection": { "type": "mercator" },
-
   "layer": [
     {
       "data": {
@@ -49,14 +43,15 @@
           "type": "quantitative",
           "title": "Staff per 100k people",
           "scale": {
-            "type": "quantize",
-            "domain": [0, 1000],
-            "scheme": { "name": "blues", "count": 5 }
+            "type": "threshold",
+            "domain": [150, 300, 450, 600, 750, 900],
+            "range": ["#fee8c8","#fdd49e","#fdbb84","#fc8d59","#ef6548","#d7301f","#990000"]
           },
           "legend": {
             "orient": "bottom",
             "direction": "horizontal",
-            "gradientLength": 260
+            "columns": 7,
+            "labelOverlap": true
           }
         },
         "tooltip": [
@@ -64,11 +59,93 @@
           { "field": "staff_normalized", "type": "quantitative", "title": "Staff per 100k" }
         ]
       }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "state": "Kuala Lumpur",
+            "lon": 101.6869, "lat": 3.1390,
+            "label_lon": 102.15, "label_lat": 3.36,
+            "note": "Kuala Lumpur (913) — Many hospitals and federal facilities raise staff per person."
+          },
+          {
+            "state": "Perlis",
+            "lon": 100.2043, "lat": 6.4440,
+            "label_lon": 100.65, "label_lat": 6.50,
+            "note": "Perlis (712) — Small population makes staff ratio look high."
+          },
+          {
+            "state": "Sabah",
+            "lon": 116.5, "lat": 5.3,
+            "label_lon": 115.0, "label_lat": 6.0,
+            "note": "Sabah (435) — Large, spread-out areas make staff coverage thinner."
+          }
+        ]
+      },
+      "mark": { "type": "rule", "stroke": "#333", "strokeWidth": 1 },
+      "encoding": {
+        "longitude": { "field": "lon", "type": "quantitative" },
+        "latitude": { "field": "lat", "type": "quantitative" },
+        "longitude2": { "field": "label_lon", "type": "quantitative" },
+        "latitude2": { "field": "label_lat", "type": "quantitative" },
+        "tooltip": [
+          { "field": "state", "title": "State" },
+          { "field": "note", "title": "Why this value?" }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "label_lon": 102.15, "label_lat": 3.36,
+            "note": "Kuala Lumpur (913) — Many hospitals and federal facilities raise staff per person."
+          }
+        ]
+      },
+      "mark": { "type": "text", "font": "Arial", "fontSize": 11, "fontWeight": "bold", "align": "left", "baseline": "middle", "fill": "#222" },
+      "encoding": {
+        "longitude": { "field": "label_lon", "type": "quantitative" },
+        "latitude": { "field": "label_lat", "type": "quantitative" },
+        "text": { "field": "note" }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "label_lon": 100.65, "label_lat": 6.50,
+            "note": "Perlis (712) — Small population makes staff ratio look high."
+          }
+        ]
+      },
+      "mark": { "type": "text", "font": "Arial", "fontSize": 11, "fontWeight": "bold", "align": "left", "baseline": "middle", "dx": 3, "fill": "#222" },
+      "encoding": {
+        "longitude": { "field": "label_lon", "type": "quantitative" },
+        "latitude": { "field": "label_lat", "type": "quantitative" },
+        "text": { "field": "note" }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "label_lon": 115.0, "label_lat": 6.0,
+            "note": "Sabah (435) — Large, spread-out areas make staff coverage thinner."
+          }
+        ]
+      },
+      "mark": { "type": "text", "font": "Arial", "fontSize": 11, "fontWeight": "bold", "align": "right", "baseline": "middle", "fill": "#222" },
+      "encoding": {
+        "longitude": { "field": "label_lon", "type": "quantitative" },
+        "latitude": { "field": "label_lat", "type": "quantitative" },
+        "text": { "field": "note" }
+      }
     }
   ],
-
   "config": {
     "legend": { "orient": "bottom" },
-    "title": { "font": "Times New Roman", "fontSize": 18 }
+    "title": { "font": "Arial", "fontSize": 18 }
   }
 }
