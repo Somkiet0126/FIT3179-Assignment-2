@@ -12,7 +12,7 @@
     "fontWeight": "bold",                
     "align": "center"
   },
-  "width": 900,
+  "width": "container",
   "height": 540,
   "autosize": { "type": "fit", "contains": "padding" },
   "padding": { "right": 30 },
