@@ -15,7 +15,7 @@
   "width": "container",
   "height": 540,
   "autosize": { "type": "fit", "contains": "padding" },
-  "padding": { "right": 25 },
+  "padding": { "right": 30 },
 
   "data": {
     "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179-Assignment-2/main/Number-of-private-hospitals-nursing-and-maternity-homes-state.csv",
