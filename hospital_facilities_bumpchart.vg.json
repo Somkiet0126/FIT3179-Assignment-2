@@ -2,17 +2,20 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": [
-      "Private Hospitality Facilites by State (2018 - 2021)",
+      "Private Hospitality Facilities by State (2018 - 2021)",
       "Rank Trajectories (Higher = More Facilities)"
     ],
     "anchor": "middle",
+    "frame": "bounds",           
     "font": "Arial",
-    "fontSize": 17
+    "fontSize": 17,
+    "fontWeight": "bold",                
+    "align": "center"
   },
   "width": "container",
   "height": 540,
   "autosize": { "type": "fit", "contains": "padding" },
-  "padding": { "right": 20 },
+  "padding": { "right": 25 },
 
   "data": {
     "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179-Assignment-2/main/Number-of-private-hospitals-nursing-and-maternity-homes-state.csv",
