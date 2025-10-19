@@ -10,7 +10,8 @@
     "font": "Arial",
     "fontSize": 17,
     "fontWeight": "bold",                
-    "align": "center"
+    "align": "center",
+    "padding": { "right": 30 },
   },
   "width": "container",
   "height": 540,
