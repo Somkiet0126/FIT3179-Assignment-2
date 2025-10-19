@@ -17,7 +17,7 @@
   "width": "container",
   "height": 670,
   "autosize": { "type": "fit", "contains": "padding" },
-  "padding": { "right": 20 },
+  "padding": { "right": 30 },
 
   "title": {
     "text": ["Incidence Rate vs Number of", "Infectious Disease Cases by Year"],
@@ -39,7 +39,36 @@
 
   "layer": [
     {
-      "mark": { "type": "circle", "opacity": 0.8, "stroke": "black", "strokeWidth": 0.5 },
+      "transform": [
+        { "calculate": "datum['Infectious Diseases'] + '|' + toString(datum.Year)", "as": "k" },
+        {
+          "lookup": "k",
+          "from": {
+            "data": {
+              "values": [
+                { "k": "Cholera|2012", "text": "Elevated—water/sanitation gaps" },
+                { "k": "Cholera|2017", "text": "Near-zero—clean water & hygiene improved" },
+
+                { "k": "Dysentry|2019", "text": "Pre-MCO outbreaks" },
+
+                { "k": "Food poisoning|2014", "text": "Peak—restaurant/cluster outbreaks" },
+                { "k": "Food poisoning|2021", "text": ["Pandemic curbs", "reduced exposure"] },
+
+                { "k": "Typhoid|2015", "text": "Spike—localized outbreaks" },
+                { "k": "Typhoid|2020", "text": "Record low—mobility limits" },
+
+                { "k": "Viral Hepatitis A|2012", "text": "High—pre-vaccine uptake" },
+                { "k": "Viral Hepatitis A|2021", "text": ["Very low—vaccination", "& hygiene"] }
+              ]
+            },
+            "key": "k",
+            "fields": ["text"]
+          },
+          "as": ["annoText"]
+        },
+        { "calculate": "isValid(datum.annoText)", "as": "isAnnotated" }
+      ],
+      "mark": { "type": "circle", "opacity": 0.85, "stroke": "black", "strokeWidth": 0.5 },
       "encoding": {
         "x": {
           "field": "Year",
@@ -66,7 +95,10 @@
           "scale": { "type": "sqrt", "range": [60, 1600], "zero": false },
           "legend": { "orient": "right", "titleFontSize": 12, "labelFontSize": 11 }
         },
-        "color": { "value": "#3b82f6" },
+        "color": {
+          "condition": { "test": "datum.isAnnotated", "value": "#0000FF" },
+          "value": "#ADD8E6"                                           
+        },
         "tooltip": [
           { "field": "Year", "title": "Year" },
           { "field": "Infectious Diseases", "title": "Disease" },
@@ -79,19 +111,19 @@
     {
       "data": {
         "values": [
-          { "Infectious Diseases": "Cholera", "Year": 2012, "Incidence Rate": 1.0,  "text": "Elevated—water/sanitation gaps" },
-          { "Infectious Diseases": "Cholera", "Year": 2017, "Incidence Rate": 0.0,  "text": "Near-zero—clean water & hygiene improved" },
+          { "Infectious Diseases": "Cholera", "Year": 2012, "Incidence Rate": 1.0,  "text": "Elevated—water/sanitation gaps", "k": "Cholera|2012" },
+          { "Infectious Diseases": "Cholera", "Year": 2017, "Incidence Rate": 0.0,  "text": "Near-zero—clean water & hygiene improved", "k": "Cholera|2017" },
 
-          { "Infectious Diseases": "Dysentry", "Year": 2019, "Incidence Rate": 0.7, "text": "Pre-MCO outbreaks" },
+          { "Infectious Diseases": "Dysentry", "Year": 2019, "Incidence Rate": 0.7, "text": "Pre-MCO outbreaks", "k": "Dysentry|2019" },
 
-          { "Infectious Diseases": "Food poisoning", "Year": 2014, "Incidence Rate": 58.6, "text": "Peak—restaurant/cluster outbreaks" },
-          { "Infectious Diseases": "Food poisoning", "Year": 2021, "Incidence Rate": 18.4, "text": ["Pandemic curbs", "reduced exposure" ]},
+          { "Infectious Diseases": "Food poisoning", "Year": 2014, "Incidence Rate": 58.6, "text": "Peak—restaurant/cluster outbreaks", "k": "Food poisoning|2014" },
+          { "Infectious Diseases": "Food poisoning", "Year": 2021, "Incidence Rate": 18.4, "text": ["Pandemic curbs", "reduced exposure"], "k": "Food poisoning|2021" },
 
-          { "Infectious Diseases": "Typhoid", "Year": 2015, "Incidence Rate": 1.4, "text": "Spike—localized outbreaks" },
-          { "Infectious Diseases": "Typhoid", "Year": 2020, "Incidence Rate": 0.2, "text": "Record low—mobility limits" },
+          { "Infectious Diseases": "Typhoid", "Year": 2015, "Incidence Rate": 1.4, "text": "Spike—localized outbreaks", "k": "Typhoid|2015" },
+          { "Infectious Diseases": "Typhoid", "Year": 2020, "Incidence Rate": 0.2, "text": "Record low—mobility limits", "k": "Typhoid|2020" },
 
-          { "Infectious Diseases": "Viral Hepatitis A", "Year": 2012, "Incidence Rate": 1.6, "text": "High—pre-vaccine uptake" },
-          { "Infectious Diseases": "Viral Hepatitis A", "Year": 2021, "Incidence Rate": 0.1, "text": ["Very low—vaccination", "& hygiene"] }
+          { "Infectious Diseases": "Viral Hepatitis A", "Year": 2012, "Incidence Rate": 1.6, "text": "High—pre-vaccine uptake", "k": "Viral Hepatitis A|2012" },
+          { "Infectious Diseases": "Viral Hepatitis A", "Year": 2021, "Incidence Rate": 0.1, "text": ["Very low—vaccination", "& hygiene"], "k": "Viral Hepatitis A|2021" }
         ]
       },
       "transform": [
