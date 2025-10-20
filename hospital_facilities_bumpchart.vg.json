@@ -2,8 +2,8 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": [
-      "Private Hospitality Facilities by State (2018 - 2021)",
-      "Rank Trajectories (Higher = More Facilities)"
+      "Private Hospitality Facilities by State",
+      "Rank Trajectories in 2018 to 2021 (Higher = More Facilities) "
     ],
     "anchor": "middle",
     "frame": "bounds",           
