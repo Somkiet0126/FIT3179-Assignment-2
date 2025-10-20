@@ -1,114 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <!-- Vega & Vega-Lite -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
-
-  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
-
-  <style>
-    :root {
-      --card-max-width: 540px;
-      --col-gap: 48px;
-      --row-gap: 80px;
-      --title-tighten: 14px;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Arial, Roboto, Helvetica, Arial;
-      background-color: #f5f5f5;
-    }
-
-    .main-header {
-      background: linear-gradient(90deg, #0b1622, #121e33);
-      color: #ffffff;
-      text-align: center;
-      padding: 40px 20px;
-      font-family: "Georgia", "Times New Roman", serif;
-      font-weight: 700;
-      font-size: 38px;
-      letter-spacing: 1px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-      border-bottom: 3px solid #1e3a8a;
-    }
-
-    .dashboard {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: var(--col-gap);
-      row-gap: var(--row-gap);
-      max-width: calc(var(--card-max-width) * 2 + var(--col-gap));
-      margin: 0 auto 48px;
-      padding: 0 12px 24px;
-      align-items: start;
-    }
-    @media (max-width:1100px){
-      .dashboard { grid-template-columns:1fr; max-width: var(--card-max-width); }
-    }
-
-    .row-title {
-      grid-column:1 / -1;
-      margin:6px 2px 0;
-      font-size:25px;
-      line-height:1.3;
-      color:#111;
-      font-weight:700;
-      text-align:center;
-    }
-
-    .tight-above { margin-top: calc(-1 * var(--title-tighten)); }
-
-    .tile {
-      display:flex;
-      flex-direction:column;
-      max-width: var(--card-max-width);
-      width:100%;
-      margin:0 auto;
-    }
-
-    /* NEW: full-width tile */
-    .tile--full {
-      grid-column: 1 / -1;
-      max-width: none;
-      width: 100%;
-    }
-
-
-    .chart {
-      background:#fff;
-      border-radius:10px;
-      box-shadow:0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-      padding:10px;
-      overflow:hidden;
-    }
-
-    .chart .vega-embed,
-    .chart .vega-embed > svg,
-    .chart .vega-embed svg {
-      width:100% !important;
-      height:auto !important;
-      max-width:100% !important;
-      display:block;
-    }
-
-    .caption {
-      background-color: #f9fafb;
-      border-left: 4px solid #3b82f6;
-      border-radius: 6px;
-      padding: 10px 14px;
-      margin: 12px 2px 0;
-      font-size: 15px;
-      line-height: 1.5;
-      color: #333;
-      font-style: italic;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    }
-  </style>
-</head>
-
 <body>
 
   <div class="main-header">
@@ -117,88 +6,52 @@
 
   <div class="dashboard">
 
-    <!-- NEW full-width row BEFORE first two-column row -->
-    <div class="tile tile--full">
+    <!-- Row title moved ABOVE the first full-width chart -->
+    <h2 class="row-title">Healthcare Analysis By State</h2>
+    <div class="tile tile--full tight-above">
       <div id="choropleth_full" class="chart"></div>
       <p class="caption">
         Choropleth overview of healthcare workforce density across states.
       </p>
     </div>
 
-    <h2 class="row-title">Healthcare Analysis By State</h2>
-
-    <!-- Left tile now shows hospital_bed_stacked_bar_chart -->
-    <div class="tile tight-above">
+    <!-- Two-column row follows -->
+    <div class="tile">
       <div id="hospital_bed_stacked_bar" class="chart"></div>
       <p class="caption">
         Hospital bed capacity by facility type over time (stacked), annotated for pandemic-era changes.
       </p>
     </div>
 
-    <div class="tile tight-above">
+    <div class="tile">
       <div id="hospital_bumpchart" class="chart"></div>
       <p class="caption">
         Selangor and W.P. Kuala Lumpur consistently have the most facilities, while Perlis/Labuan/Putrajaya stay near zero; most states dip around 2020 and rebound by 2021.
       </p>
     </div>
 
-    <!-- NEW full-width row BEFORE second two-column row -->
-    <div class="tile tile--full">
+    <!-- Row title moved ABOVE the second full-width chart -->
+    <h2 class="row-title">Infectious Disease Trends & Changes</h2>
+    <div class="tile tile--full tight-above">
       <div id="dengue_psm_full" class="chart"></div>
       <p class="caption">
         Proportional symbol map: state dengue burden; use the embedded year selector to filter.
       </p>
     </div>
 
-    <h2 class="row-title">Infectious Disease Trends & Changes</h2>
-
-    <div class="tile tight-above">
+    <!-- Two-column row follows -->
+    <div class="tile">
       <div id="bubble_plot" class="chart"></div>
       <p class="caption">
         Food poisoning dominates every year (spikes in 2007–2008 and 2014–2016); all diseases dip sharply in 2020–2021; cholera nearly vanished in 2017 (2 cases).
       </p>
     </div>
 
-    <div class="tile tight-above">
+    <div class="tile">
       <div id="std_dumbbell" class="chart"></div>
       <p class="caption">
         2017→2022, syphilis surged nationwide (2,591 → 4,669; +80%), with big jumps in Pulau Pinang (85 → 455), Selangor (664 → 1,161) and W.P. Kuala Lumpur (320 → 523).
       </p>
     </div>
   </div>
-
-  <script>
-    // Specs
-    const specChoroplethFull = "healthcare_staff_choropleth_map.vg.json";
-    const specHospBedsStacked = "hospital_bed_stacked_bar_chart.vg.json";
-    const specBumpChart = "hospital_facilities_bumpchart.vg.json";
-    const specDenguePSMFull = "dengue_proportional_symbol_map.vg.json";
-    const specBubble = "infectious_disease_bubble_plot.vg.json";
-    const specDumbbell = "std_dumbell_chart.vg.json";
-
-    const baseOpt = { actions:false, renderer:"svg" };
-
-    const optWithHeight = (h) => ({
-      ...baseOpt,
-      patch: (spec) => ({
-        ...spec,
-        width: "container",
-        height: h,
-        autosize: { type: "fit", contains: "padding" }
-      })
-    });
-
-    // Embeds
-    vegaEmbed("#choropleth_full",  specChoroplethFull,  optWithHeight(460)).catch(console.error);
-
-    vegaEmbed("#hospital_bed_stacked_bar", specHospBedsStacked, optWithHeight(420)).catch(console.error);
-    vegaEmbed("#hospital_bumpchart",       specBumpChart,       optWithHeight(420)).catch(console.error);
-
-    vegaEmbed("#dengue_psm_full", specDenguePSMFull, optWithHeight(740)).catch(console.error);
-
-    vegaEmbed("#bubble_plot",  specBubble,   optWithHeight(485)).catch(console.error);
-    vegaEmbed("#std_dumbbell", specDumbbell, optWithHeight(420)).catch(console.error);
-  </script>
-
 </body>
-</html>
