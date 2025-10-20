@@ -12,10 +12,9 @@
     :root {
       --card-max-width: 540px;
       --col-gap: 48px;
-      --row-gap: 80px;
-      --title-tighten: 14px;         /* still available if you use tight-above elsewhere */
-      --gap-below-header: 48px;      /* space between black header and dashboard */
-      --gap-row-title: 18px;         /* NEW: shared gap (KPI→title and title→chart) */
+      --row-gap: 80px;             /* master row spacing (drives title spacing too) */
+      --title-tighten: 14px;       /* utility if you need tighter spacing elsewhere */
+      --gap-below-header: 48px;    /* space between black header and dashboard */
     }
 
     body {
@@ -51,13 +50,13 @@
       .dashboard { grid-template-columns:1fr; max-width: var(--card-max-width); }
     }
 
-    /* ===== KPI / STAT CARDS ===== */
+    /* ====== KPI / STAT CARDS ====== */
     .stats {
       grid-column: 1 / -1;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 22px;
-      margin-bottom: var(--gap-row-title);   /* controls KPI → title gap */
+      margin-bottom: calc(var(--row-gap) / 2);       /* top half of shared gap to title */
     }
     @media (max-width: 900px) {
       .stats { grid-template-columns: 1fr; }
@@ -80,20 +79,21 @@
     /* ===== Titles & Tiles ===== */
     .row-title {
       grid-column:1 / -1;
-      margin:6px 2px 0;
+      margin: 0;                                      /* no extra margins */
+      padding: calc(var(--row-gap) / 2) 0;            /* split the shared gap above & below */
       font-size:25px;
       line-height:1.3;
       color:#111;
       font-weight:700;
       text-align:center;
     }
-    /* First title: no extra top margin; spacing comes from .stats margin-bottom above */
+    /* First title sits right after KPI cards; spacing handled by .stats */
     .dashboard > .stats + .row-title { margin-top: 0; }
 
-    /* Make title → chart gap match KPI → title gap */
-    .row-title + .tile--full { margin-top: var(--gap-row-title); }
+    /* Title → next full-width chart gets the other half */
+    .row-title + .tile--full { margin-top: calc(var(--row-gap) / 2); }
 
-    .tight-above { margin-top: calc(-1 * var(--title-tighten)); } /* optional utility if needed elsewhere */
+    .tight-above { margin-top: calc(-1 * var(--title-tighten)); } /* optional utility */
 
     .tile {
       display:flex;
