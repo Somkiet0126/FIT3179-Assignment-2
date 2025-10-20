@@ -15,7 +15,7 @@
       --row-gap: 80px;
       --title-tighten: 14px;
       --gap-below-header: 48px;    /* space between the black header and top of dashboard */
-      --gap-stats-to-title: 16px;   /* NEW: space between KPI cards and first row title */
+      --gap-stats-to-title: 0px;   /* NEW: space between KPI cards and first row title */
     }
 
     body {
@@ -57,7 +57,7 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 22px;
-      margin-bottom: var(--gap-stats-to-title); /* ↓ tighter gap to first title */
+      margin-bottom: var(---to-title); /* ↓ tighter gap to first title */
     }
     @media (max-width: 900px) {
       .stats { grid-template-columns: 1fr; }
