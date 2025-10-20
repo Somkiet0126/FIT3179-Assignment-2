@@ -1,7 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "padding": {"right": 20},
-  "spacing": 0,
+  "padding": {"right": 20, "bottom": 5, "top": 8},
   "vconcat": [
     {
       "width": "container",
@@ -20,7 +19,12 @@
             "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179-Assignment-2/main/map_malaysia.topojson",
             "format": {"type": "topojson", "feature": "ne_10m_graticules_1"}
           },
-          "mark": {"type": "geoshape", "filled": false, "stroke": "#d1d5db", "strokeWidth": 0.6}
+          "mark": {
+            "type": "geoshape",
+            "filled": false,
+            "stroke": "#d1d5db",
+            "strokeWidth": 0.6
+          }
         },
         {
           "data": {
@@ -34,24 +38,40 @@
             "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179-Assignment-2/main/map_malaysia.topojson",
             "format": {"type": "topojson", "feature": "my"}
           },
-          "mark": {"type": "geoshape", "filled": false, "stroke": "#ffffff", "strokeWidth": 2.2}
+          "mark": {
+            "type": "geoshape",
+            "filled": false,
+            "stroke": "#ffffff",
+            "strokeWidth": 2.2
+          }
         },
         {
           "data": {
             "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179-Assignment-2/main/map_malaysia.topojson",
             "format": {"type": "topojson", "feature": "my"}
           },
-          "mark": {"type": "geoshape", "filled": false, "stroke": "#334155", "strokeWidth": 0.9}
+          "mark": {
+            "type": "geoshape",
+            "filled": false,
+            "stroke": "#334155",
+            "strokeWidth": 0.9
+          }
         },
         {
           "data": {
             "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179-Assignment-2/main/denggi_dataset.csv",
-            "format": {"type": "csv", "parse": {"Year": "number", "Cases": "number"}}
+            "format": {
+              "type": "csv",
+              "parse": {"Year": "number", "Cases": "number"}
+            }
           },
           "transform": [
             {"filter": "datum.State != 'MALAYSIA'"},
             {"filter": {"param": "yrbrush"}},
-            {"aggregate": [{"op": "sum", "field": "Cases", "as": "CasesSum"}], "groupby": ["State"]},
+            {
+              "aggregate": [{"op": "sum", "field": "Cases", "as": "CasesSum"}],
+              "groupby": ["State"]
+            },
             {
               "lookup": "State",
               "from": {
@@ -80,7 +100,12 @@
             },
             {"filter": "isValid(datum.lon) && isValid(datum.lat)"}
           ],
-          "mark": {"type": "circle", "opacity": 0.85, "stroke": "#111", "strokeWidth": 0.5},
+          "mark": {
+            "type": "circle",
+            "opacity": 0.85,
+            "stroke": "#111",
+            "strokeWidth": 0.5
+          },
           "encoding": {
             "longitude": {"field": "lon"},
             "latitude": {"field": "lat"},
@@ -90,16 +115,10 @@
               "title": "Cases (sum in selection)",
               "scale": {"type": "sqrt", "range": [40, 2000], "zero": false},
               "legend": {
-                "orient": "none",
-                "legendX": {"expr": "width + 40"},
-                "legendY": {"expr": "100"},
+                "orient": "right",
                 "direction": "vertical",
-                "symbolSize": 80,
-                "labelFontSize": 10,
-                "titleFontSize": 11,
-                "padding": 8,
-                "titlePadding": 4,
-                "labelPadding": 2
+                "offset": 24,
+                "padding": 8
               }
             },
             "color": {"value": "#2563eb"},
@@ -124,19 +143,33 @@
       },
       "data": {
         "url": "https://raw.githubusercontent.com/Somkiet0126/FIT3179-Assignment-2/main/denggi_dataset.csv",
-        "format": {"type": "csv", "parse": {"Year": "number", "Cases": "number"}}
+        "format": {
+          "type": "csv",
+          "parse": {"Year": "number", "Cases": "number"}
+        }
       },
       "transform": [
         {"filter": "datum.State != 'MALAYSIA'"},
-        {"aggregate": [{"op": "sum", "field": "Cases", "as": "TotalCases"}], "groupby": ["Year"]}
+        {
+          "aggregate": [{"op": "sum", "field": "Cases", "as": "TotalCases"}],
+          "groupby": ["Year"]
+        }
       ],
       "mark": {"type": "area", "opacity": 0.6, "line": true},
       "params": [
-        {"name": "yrbrush", "select": {"type": "interval", "encodings": ["x"]}, "init": {"x": [2018.5, 2019.5]}}
+        {
+          "name": "yrbrush",
+          "select": {"type": "interval", "encodings": ["x"]},
+          "init": {"x": [2018.5, 2019.5]}
+        }
       ],
       "encoding": {
         "x": {"field": "Year", "type": "quantitative", "title": "Year"},
-        "y": {"field": "TotalCases", "type": "quantitative", "title": "Total cases (all states)"},
+        "y": {
+          "field": "TotalCases",
+          "type": "quantitative",
+          "title": "Total cases (all states)"
+        },
         "color": {"value": "#64748b"}
       }
     }
