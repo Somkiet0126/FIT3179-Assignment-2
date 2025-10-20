@@ -12,9 +12,9 @@
     :root {
       --card-max-width: 540px;
       --col-gap: 48px;
-      --row-gap: 80px;             /* master row spacing (drives title spacing too) */
-      --title-tighten: 14px;       /* utility if you need tighter spacing elsewhere */
-      --gap-below-header: 48px;    /* space between black header and dashboard */
+      --row-gap: 80px;       /* global grid row spacing */
+      --title-tighten: 14px; /* how much to pull charts/titles upward when 'tight-above' is used */
+      --gap-below-header: 48px;
     }
 
     body {
@@ -50,17 +50,15 @@
       .dashboard { grid-template-columns:1fr; max-width: var(--card-max-width); }
     }
 
-    /* ====== KPI / STAT CARDS ====== */
+    /* ===== KPI / STAT CARDS ===== */
     .stats {
       grid-column: 1 / -1;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 22px;
-      margin-bottom: calc(var(--row-gap) / 2);       /* top half of shared gap to title */
     }
-    @media (max-width: 900px) {
-      .stats { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 900px) { .stats { grid-template-columns: 1fr; } }
+
     .stat-card {
       background: #fff;
       border-radius: 14px;
@@ -79,21 +77,16 @@
     /* ===== Titles & Tiles ===== */
     .row-title {
       grid-column:1 / -1;
-      margin: 0;                                      /* no extra margins */
-      padding: calc(var(--row-gap) / 2) 0;            /* split the shared gap above & below */
+      margin:6px 2px 0;
       font-size:25px;
       line-height:1.3;
       color:#111;
       font-weight:700;
       text-align:center;
     }
-    /* First title sits right after KPI cards; spacing handled by .stats */
-    .dashboard > .stats + .row-title { margin-top: 0; }
 
-    /* Title → next full-width chart gets the other half */
-    .row-title + .tile--full { margin-top: calc(var(--row-gap) / 2); }
-
-    .tight-above { margin-top: calc(-1 * var(--title-tighten)); } /* optional utility */
+    /* Utility to pull the next element upward by --title-tighten */
+    .tight-above { margin-top: calc(-1 * var(--title-tighten)); }
 
     .tile {
       display:flex;
@@ -168,8 +161,11 @@
     </div>
 
     <!-- Row title BEFORE the first full-width chart -->
-    <h2 class="row-title">Healthcare Analysis By State</h2>
-    <div class="tile tile--full">
+    <!-- Add tight-above here to match the reference spacing (KPI → title) -->
+    <h2 class="row-title tight-above">Healthcare Analysis By State</h2>
+
+    <!-- Also use tight-above on the first full-width chart to match title → chart gap -->
+    <div class="tile tile--full tight-above">
       <div id="choropleth_full" class="chart"></div>
       <p class="caption">
         Choropleth overview of healthcare workforce density across states.
@@ -177,23 +173,23 @@
     </div>
 
     <!-- Two-column row -->
-    <div class="tile">
+    <div class="tile tight-above">
       <div id="hospital_bed_stacked_bar" class="chart"></div>
       <p class="caption">
         Hospital bed capacity by facility type over time (stacked), annotated for pandemic-era changes.
       </p>
     </div>
 
-    <div class="tile">
+    <div class="tile tight-above">
       <div id="hospital_bumpchart" class="chart"></div>
       <p class="caption">
         Selangor and W.P. Kuala Lumpur consistently have the most facilities, while Perlis/Labuan/Putrajaya stay near zero; most states dip around 2020 and rebound by 2021.
       </p>
     </div>
 
-    <!-- Row title BEFORE the second full-width chart -->
     <h2 class="row-title">Infectious Disease Trends & Changes</h2>
-    <div class="tile tile--full">
+
+    <div class="tile tile--full tight-above">
       <div id="dengue_psm_full" class="chart"></div>
       <p class="caption">
         Proportional symbol map: state dengue burden; use the embedded year selector to filter.
@@ -201,14 +197,14 @@
     </div>
 
     <!-- Two-column row -->
-    <div class="tile">
+    <div class="tile tight-above">
       <div id="bubble_plot" class="chart"></div>
       <p class="caption">
         Food poisoning dominates every year (spikes in 2007–2008 and 2014–2016); all diseases dip sharply in 2020–2021; cholera nearly vanished in 2017 (2 cases).
       </p>
     </div>
 
-    <div class="tile">
+    <div class="tile tight-above">
       <div id="std_dumbbell" class="chart"></div>
       <p class="caption">
         2017→2022, syphilis surged nationwide (2,591 → 4,669; +80%), with big jumps in Pulau Pinang (85 → 455), Selangor (664 → 1,161) and W.P. Kuala Lumpur (320 → 523).
@@ -239,14 +235,11 @@
 
     // Embeds
     vegaEmbed("#choropleth_full",  specChoroplethFull,  optWithHeight(460)).catch(console.error);
-
     vegaEmbed("#hospital_bed_stacked_bar", specHospBedsStacked, optWithHeight(420)).catch(console.error);
     vegaEmbed("#hospital_bumpchart",       specBumpChart,       optWithHeight(420)).catch(console.error);
-
-    vegaEmbed("#dengue_psm_full", specDenguePSMFull, optWithHeight(740)).catch(console.error);
-
-    vegaEmbed("#bubble_plot",  specBubble,   optWithHeight(485)).catch(console.error);
-    vegaEmbed("#std_dumbbell", specDumbbell, optWithHeight(420)).catch(console.error);
+    vegaEmbed("#dengue_psm_full",          specDenguePSMFull,   optWithHeight(740)).catch(console.error);
+    vegaEmbed("#bubble_plot",               specBubble,          optWithHeight(485)).catch(console.error);
+    vegaEmbed("#std_dumbbell",              specDumbbell,        optWithHeight(420)).catch(console.error);
   </script>
 
 </body>
