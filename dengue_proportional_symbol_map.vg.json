@@ -4,7 +4,7 @@
   "spacing": 0,
   "vconcat": [
     {
-      "width": 900,
+      "width": "container",
       "height": 520,
       "projection": {"type": "mercator"},
       "title": {
@@ -132,7 +132,7 @@
       ]
     },
     {
-      "width": 900,
+      "width": "container",
       "height": 120,
       "title": {
         "text": "Drag on this area chart to filter by year(s)",
