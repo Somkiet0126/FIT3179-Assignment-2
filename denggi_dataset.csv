@@ -1,0 +1,337 @@
+State,Year,Cases
+Perlis,1999,46
+Perlis,2000,29
+Perlis,2001,157
+Perlis,2002,179
+Perlis,2003,148
+Perlis,2004,398
+Perlis,2005,324
+Perlis,2006,193
+Perlis,2007,311
+Perlis,2008,184
+Perlis,2009,191
+Perlis,2010,215
+Perlis,2011,110
+Perlis,2012,172
+Perlis,2013,226
+Perlis,2014,317
+Perlis,2015,258
+Perlis,2016,183
+Perlis,2017,175
+Perlis,2018,369
+Perlis,2019,288
+Kedah,1999,892
+Kedah,2000,471
+Kedah,2001,590
+Kedah,2002,751
+Kedah,2003,1278
+Kedah,2004,1742
+Kedah,2005,1862
+Kedah,2006,1907
+Kedah,2007,2584
+Kedah,2008,1678
+Kedah,2009,750
+Kedah,2010,782
+Kedah,2011,514
+Kedah,2012,817
+Kedah,2013,813
+Kedah,2014,1014
+Kedah,2015,1000
+Kedah,2016,994
+Kedah,2017,1430
+Kedah,2018,2190
+Kedah,2019,1587
+Pulau Pinang,1999,585
+Pulau Pinang,2000,160
+Pulau Pinang,2001,2288
+Pulau Pinang,2002,941
+Pulau Pinang,2003,746
+Pulau Pinang,2004,1767
+Pulau Pinang,2005,3527
+Pulau Pinang,2006,2653
+Pulau Pinang,2007,3106
+Pulau Pinang,2008,2324
+Pulau Pinang,2009,2444
+Pulau Pinang,2010,1834
+Pulau Pinang,2011,1579
+Pulau Pinang,2012,791
+Pulau Pinang,2013,1053
+Pulau Pinang,2014,3141
+Pulau Pinang,2015,5830
+Pulau Pinang,2016,2576
+Pulau Pinang,2017,2681
+Pulau Pinang,2018,6071
+Pulau Pinang,2019,4119
+Perak,1999,1047
+Perak,2000,387
+Perak,2001,1391
+Perak,2002,3278
+Perak,2003,4418
+Perak,2004,3108
+Perak,2005,3082
+Perak,2006,2007
+Perak,2007,2889
+Perak,2008,4219
+Perak,2009,2734
+Perak,2010,2288
+Perak,2011,1411
+Perak,2012,1716
+Perak,2013,2519
+Perak,2014,7525
+Perak,2015,9466
+Perak,2016,3777
+Perak,2017,5411
+Perak,2018,2736
+Perak,2019,3226
+Selangor,1999,1956
+Selangor,2000,1439
+Selangor,2001,3828
+Selangor,2002,9385
+Selangor,2003,6769
+Selangor,2004,9189
+Selangor,2005,12705
+Selangor,2006,12264
+Selangor,2007,15891
+Selangor,2008,21262
+Selangor,2009,18676
+Selangor,2010,16367
+Selangor,2011,7758
+Selangor,2012,9113
+Selangor,2013,23852
+Selangor,2014,54290
+Selangor,2015,63198
+Selangor,2016,51652
+Selangor,2017,45290
+Selangor,2018,45349
+Selangor,2019,72543
+W.P. Kuala Lumpur,1999,1329
+W.P. Kuala Lumpur,2000,494
+W.P. Kuala Lumpur,2001,2069
+W.P. Kuala Lumpur,2002,6723
+W.P. Kuala Lumpur,2003,5629
+W.P. Kuala Lumpur,2004,6288
+W.P. Kuala Lumpur,2005,5680
+W.P. Kuala Lumpur,2006,7804
+W.P. Kuala Lumpur,2007,7439
+W.P. Kuala Lumpur,2008,5446
+W.P. Kuala Lumpur,2009,3746
+W.P. Kuala Lumpur,2010,4205
+W.P. Kuala Lumpur,2011,2038
+W.P. Kuala Lumpur,2012,1814
+W.P. Kuala Lumpur,2013,2570
+W.P. Kuala Lumpur,2014,7185
+W.P. Kuala Lumpur,2015,8332
+W.P. Kuala Lumpur,2016,8663
+W.P. Kuala Lumpur,2017,8350
+W.P. Kuala Lumpur,2018,7591
+W.P. Kuala Lumpur,2019,15424
+Negeri Sembilan,1999,427
+Negeri Sembilan,2000,765
+Negeri Sembilan,2001,992
+Negeri Sembilan,2002,1574
+Negeri Sembilan,2003,2032
+Negeri Sembilan,2004,1584
+Negeri Sembilan,2005,1379
+Negeri Sembilan,2006,1201
+Negeri Sembilan,2007,1275
+Negeri Sembilan,2008,1405
+Negeri Sembilan,2009,1057
+Negeri Sembilan,2010,1501
+Negeri Sembilan,2011,737
+Negeri Sembilan,2012,552
+Negeri Sembilan,2013,1198
+Negeri Sembilan,2014,3781
+Negeri Sembilan,2015,2454
+Negeri Sembilan,2016,2879
+Negeri Sembilan,2017,3055
+Negeri Sembilan,2018,1864
+Negeri Sembilan,2019,2305
+Melaka,1999,229
+Melaka,2000,104
+Melaka,2001,129
+Melaka,2002,355
+Melaka,2003,632
+Melaka,2004,865
+Melaka,2005,909
+Melaka,2006,957
+Melaka,2007,732
+Melaka,2008,830
+Melaka,2009,769
+Melaka,2010,1485
+Melaka,2011,450
+Melaka,2012,449
+Melaka,2013,1505
+Melaka,2014,2770
+Melaka,2015,2420
+Melaka,2016,2299
+Melaka,2017,1425
+Melaka,2018,722
+Melaka,2019,2156
+Johor,1999,957
+Johor,2000,1434
+Johor,2001,2346
+Johor,2002,3952
+Johor,2003,3249
+Johor,2004,3056
+Johor,2005,2974
+Johor,2006,2726
+Johor,2007,3363
+Johor,2008,3908
+Johor,2009,2528
+Johor,2010,4406
+Johor,2011,1583
+Johor,2012,1650
+Johor,2013,4828
+Johor,2014,6323
+Johor,2015,15743
+Johor,2016,10641
+Johor,2017,7932
+Johor,2018,5885
+Johor,2019,10873
+Pahang,1999,782
+Pahang,2000,390
+Pahang,2001,597
+Pahang,2002,1299
+Pahang,2003,1487
+Pahang,2004,1597
+Pahang,2005,1823
+Pahang,2006,1358
+Pahang,2007,2657
+Pahang,2008,1327
+Pahang,2009,907
+Pahang,2010,1688
+Pahang,2011,894
+Pahang,2012,641
+Pahang,2013,725
+Pahang,2014,2170
+Pahang,2015,3001
+Pahang,2016,3050
+Pahang,2017,1690
+Pahang,2018,990
+Pahang,2019,2873
+Terengganu,1999,433
+Terengganu,2000,125
+Terengganu,2001,271
+Terengganu,2002,1176
+Terengganu,2003,833
+Terengganu,2004,1103
+Terengganu,2005,747
+Terengganu,2006,726
+Terengganu,2007,1269
+Terengganu,2008,1721
+Terengganu,2009,968
+Terengganu,2010,1472
+Terengganu,2011,675
+Terengganu,2012,739
+Terengganu,2013,600
+Terengganu,2014,1688
+Terengganu,2015,1455
+Terengganu,2016,2009
+Terengganu,2017,292
+Terengganu,2018,550
+Terengganu,2019,542
+Kelantan,1999,444
+Kelantan,2000,368
+Kelantan,2001,1007
+Kelantan,2002,1778
+Kelantan,2003,2676
+Kelantan,2004,1682
+Kelantan,2005,1326
+Kelantan,2006,2014
+Kelantan,2007,3503
+Kelantan,2008,2399
+Kelantan,2009,1031
+Kelantan,2010,3578
+Kelantan,2011,743
+Kelantan,2012,1245
+Kelantan,2013,1427
+Kelantan,2014,14456
+Kelantan,2015,2850
+Kelantan,2016,6180
+Kelantan,2017,2515
+Kelantan,2018,1950
+Kelantan,2019,6003
+Sarawak,1999,675
+Sarawak,2000,784
+Sarawak,2001,461
+Sarawak,2002,994
+Sarawak,2003,856
+Sarawak,2004,568
+Sarawak,2005,1411
+Sarawak,2006,1821
+Sarawak,2007,1845
+Sarawak,2008,1517
+Sarawak,2009,4490
+Sarawak,2010,4240
+Sarawak,2011,974
+Sarawak,2012,1519
+Sarawak,2013,1292
+Sarawak,2014,2571
+Sarawak,2015,1923
+Sarawak,2016,2773
+Sarawak,2017,952
+Sarawak,2018,823
+Sarawak,2019,2648
+Sabah,1999,344
+Sabah,2000,153
+Sabah,2001,242
+Sabah,2002,382
+Sabah,2003,792
+Sabah,2004,930
+Sabah,2005,1901
+Sabah,2006,911
+Sabah,2007,1953
+Sabah,2008,1045
+Sabah,2009,1170
+Sabah,2010,2091
+Sabah,2011,402
+Sabah,2012,672
+Sabah,2013,724
+Sabah,2014,1456
+Sabah,2015,2904
+Sabah,2016,3668
+Sabah,2017,2560
+Sabah,2018,3423
+Sabah,2019,5478
+W.P. Labuan,1999,0
+W.P. Labuan,2000,0
+W.P. Labuan,2001,0
+W.P. Labuan,2002,0
+W.P. Labuan,2003,0
+W.P. Labuan,2004,18
+W.P. Labuan,2005,36
+W.P. Labuan,2006,14
+W.P. Labuan,2007,29
+W.P. Labuan,2008,70
+W.P. Labuan,2009,25
+W.P. Labuan,2010,19
+W.P. Labuan,2011,16
+W.P. Labuan,2012,10
+W.P. Labuan,2013,14
+W.P. Labuan,2014,11
+W.P. Labuan,2015,2
+W.P. Labuan,2016,13
+W.P. Labuan,2017,91
+W.P. Labuan,2018,102
+W.P. Labuan,2019,36
+MALAYSIA,1999,10146
+MALAYSIA,2000,7103
+MALAYSIA,2001,16368
+MALAYSIA,2002,32767
+MALAYSIA,2003,31545
+MALAYSIA,2004,33895
+MALAYSIA,2005,39686
+MALAYSIA,2006,38556
+MALAYSIA,2007,48846
+MALAYSIA,2008,49335
+MALAYSIA,2009,41486
+MALAYSIA,2010,46171
+MALAYSIA,2011,19884
+MALAYSIA,2012,21900
+MALAYSIA,2013,43346
+MALAYSIA,2014,108698
+MALAYSIA,2015,120836
+MALAYSIA,2016,101357
+MALAYSIA,2017,83849
+MALAYSIA,2018,80615
+MALAYSIA,2019,130101
