@@ -14,7 +14,7 @@
       --col-gap: 48px;
       --row-gap: 80px;
       --title-tighten: 14px;
-      --gap-below-header: 48px; /* ← consistent space between black header and FIRST row title */
+      --gap-below-header: 48px; /* space between the black header and the first row title / content */
     }
 
     body {
@@ -43,13 +43,57 @@
       row-gap: var(--row-gap);
       max-width: calc(var(--card-max-width) * 2 + var(--col-gap));
       margin: 0 auto 48px;
-      padding: var(--gap-below-header) 12px 24px; /* ↑ adds ONLY space below header */
+      padding: var(--gap-below-header) 12px 24px; /* ONLY space below header */
       align-items: start;
     }
     @media (max-width:1100px){
       .dashboard { grid-template-columns:1fr; max-width: var(--card-max-width); }
     }
 
+    /* ====== KPI / STAT CARDS ====== */
+    .stats {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-bottom: 8px;
+    }
+    @media (max-width: 900px) {
+      .stats { grid-template-columns: 1fr; }
+    }
+    .stat-card {
+      position: relative;
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px 22px 18px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
+      border-left: 6px solid transparent;
+    }
+    /* colored accents */
+    .accent-blue   { border-left-color: #3b82f6; }
+    .accent-amber  { border-left-color: #f59e0b; }
+    .accent-purple { border-left-color: #8b5cf6; }
+
+    .stat-value {
+      font-weight: 800;
+      font-size: 34px;
+      color: #0f172a;
+      letter-spacing: 0.3px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      font-size: 12.5px;
+      letter-spacing: 1px;
+      color: #475569;
+    }
+    .stat-emoji { font-size: 16px; line-height: 1; opacity: 0.9; }
+
+    /* ====== Titles & Tiles ====== */
     .row-title {
       grid-column:1 / -1;
       margin:6px 2px 0;
@@ -121,6 +165,25 @@
   </div>
 
   <div class="dashboard">
+
+    <!-- ===== KPI / STAT CARDS (new) ===== -->
+    <div class="stats" role="group" aria-label="Summary statistics">
+      <div class="stat-card accent-blue" aria-label="Territories Covered">
+        <div class="stat-value">16</div>
+        <div class="stat-label"><span class="stat-emoji">🗺️</span> Territories Covered</div>
+      </div>
+
+      <div class="stat-card accent-amber" aria-label="Diseases Tracked">
+        <div class="stat-value">11</div>
+        <div class="stat-label"><span class="stat-emoji">🧪</span> Diseases Tracked</div>
+      </div>
+
+      <div class="stat-card accent-purple" aria-label="Year Coverage">
+        <div class="stat-value">20</div>
+        <div class="stat-label"><span class="stat-emoji">📅</span> Year Coverage</div>
+      </div>
+    </div>
+    <!-- ===== End KPI / STAT CARDS ===== -->
 
     <!-- Row title BEFORE the first full-width chart -->
     <h2 class="row-title">Healthcare Analysis By State</h2>
