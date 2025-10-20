@@ -76,12 +76,6 @@
       width: 100%;
     }
 
-    /* full-width row */
-    .tile.full{
-      grid-column: 1 / -1;  
-      max-width: none;       
-      width: 100%;
-    }
 
     .chart {
       background:#fff;
@@ -134,7 +128,7 @@
     <h2 class="row-title">Healthcare Analysis By State</h2>
 
     <!-- Left tile now shows hospital_bed_stacked_bar_chart -->
-    <div class="tile full">
+    <div class="tile tight-above">
       <div id="hospital_bed_stacked_bar" class="chart"></div>
       <p class="caption">
         Hospital bed capacity by facility type over time (stacked), annotated for pandemic-era changes.
