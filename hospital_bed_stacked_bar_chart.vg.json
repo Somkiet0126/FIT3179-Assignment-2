@@ -10,7 +10,8 @@
     "font": "Segoe UI",
     "fontSize": 17,
     "fontWeight": "bold",
-    "align": "center"
+    "align": "center",
+    "offset": 20
   },
   "width": "container",
   "height": 540,
