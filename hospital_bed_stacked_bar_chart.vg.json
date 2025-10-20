@@ -10,8 +10,7 @@
     "font": "Segoe UI",
     "fontSize": 17,
     "fontWeight": "bold",
-    "align": "center",
-    "offset": 20
+    "align": "center"
   },
   "width": "container",
   "height": 540,
@@ -106,10 +105,10 @@
         "fill": "#000",
         "align": "right",
         "baseline": "bottom",
-        "dx": -6
+        "dx": 133
       },
       "encoding": {
-        "x": { "expr": "width - 10" },
+        "x": { "value": "width" },
         "y": { "value": -5 },
         "text": { "value": "MOH = Ministry of Health" }
       }
@@ -139,7 +138,7 @@
             "type": "rule",
             "color": "#333333",
             "strokeWidth": 1.5,
-            "x2Offset": { "expr": "(width/900)*125" },
+            "x2Offset": { "expr": "(width/900)*165" },
             "zindex": 9
           },
           "encoding": {
@@ -157,7 +156,7 @@
             "fontSize": 10,
             "fontWeight": "bold",
             "fill": "#000",
-            "dx": { "expr": "(width/900)*130" }
+            "dx": { "expr": "(width/900)*170" }
           },
           "encoding": {
             "x":  { "field": "YearNum", "type": "ordinal" },
@@ -183,8 +182,8 @@
           "as": ["y0","y1"]
         },
         { "filter": "datum.TypeLabel == 'MOH Hospitals'" },
-        { "calculate": "datum.y1 - 800",  "as": "ruleStartY" },
-        { "calculate": "datum.y1 - 3000", "as": "ruleEndY" }
+        { "calculate": "datum.y1 - 1500",  "as": "ruleStartY" },
+        { "calculate": "datum.y1 - 5000", "as": "ruleEndY" }
       ],
       "layer": [
         {
@@ -192,7 +191,7 @@
             "type": "rule",
             "color": "#333333",
             "strokeWidth": 1.5,
-            "x2Offset": { "expr": "(width/900)*55" },
+            "x2Offset": { "expr": "(width/900)*155" },
             "zindex": 9
           },
           "encoding": {
