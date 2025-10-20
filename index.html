@@ -14,6 +14,7 @@
       --col-gap: 48px;
       --row-gap: 80px;
       --title-tighten: 14px;
+      --gap-below-header: 32px; /* ← consistent space between black header and FIRST row title */
     }
 
     body {
@@ -42,7 +43,7 @@
       row-gap: var(--row-gap);
       max-width: calc(var(--card-max-width) * 2 + var(--col-gap));
       margin: 0 auto 48px;
-      padding: 0 12px 24px;
+      padding: var(--gap-below-header) 12px 24px; /* ↑ adds ONLY space below header */
       align-items: start;
     }
     @media (max-width:1100px){
@@ -58,21 +59,11 @@
       font-weight:700;
       text-align:center;
     }
+    /* First title should not add extra top margin; spacing comes from .dashboard padding */
+    .dashboard > .row-title:first-of-type { margin-top: 0; }
 
-    /* Equal, balanced spacing for the FIRST row title */
-    .dashboard > .row-title:first-of-type {
-      margin-top: 32px;   /* space from the dark header */
-      margin-bottom: 32px;/* space to the full-width chart */
-    }
-    /* Keep the first full-width chart snug to preserve equal spacing */
-    .dashboard > .row-title:first-of-type + .tile--full {
-      margin-top: 0;
-    }
-
-    /* Auto-tighten spacing when any row title is followed by a full-width tile */
-    .row-title + .tile--full {
-      margin-top: calc(-1 * var(--title-tighten));
-    }
+    /* Keep spacing to the full-width chart unchanged */
+    .row-title + .tile--full { margin-top: calc(-1 * var(--title-tighten)); }
 
     .tight-above { margin-top: calc(-1 * var(--title-tighten)); }
 
