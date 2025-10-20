@@ -15,12 +15,16 @@
       --row-gap: 80px;       /* global grid row spacing */
       --title-tighten: 14px; /* how much to pull charts/titles upward when 'tight-above' is used */
       --gap-below-header: 48px;
+      --footer-bg: #243447;
+      --footer-fg: #e5eff7;
+      --footer-accent: #60a5fa;
     }
 
     body {
       margin: 0;
       font-family: system-ui, -apple-system, Arial, Roboto, Helvetica, Arial;
       background-color: #f5f5f5;
+      color: #0b1622;
     }
 
     .main-header {
@@ -85,7 +89,6 @@
       text-align:center;
     }
 
-    /* Utility to pull the next element upward by --title-tighten */
     .tight-above { margin-top: calc(-1 * var(--title-tighten)); }
 
     .tile {
@@ -131,6 +134,49 @@
       font-style: italic;
       box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
+
+    /* ===== Footer ===== */
+    .site-footer{
+      background: var(--footer-bg);
+      color: var(--footer-fg);
+      margin-top: 56px;
+      padding: 28px 20px 36px;
+      text-align: center;
+      border-top: 4px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner{
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .site-footer h3{
+      margin: 0 0 12px;
+      font-size: 18px;
+      color: #ffffff;
+    }
+    .site-footer p{
+      margin: 0 0 14px;
+      font-size: 15px;
+    }
+    .source-list{
+      display: inline-block;
+      text-align: left;
+      margin: 0 auto;
+      padding: 0;
+      list-style: none;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+    .source-list li{ margin: 4px 0; }
+    .site-footer a{
+      color: var(--footer-accent);
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .site-footer a:hover{ text-decoration: underline; }
+    .credit{
+      font-weight: 600;
+      color: #ffffff;
+    }
   </style>
 </head>
 
@@ -161,10 +207,8 @@
     </div>
 
     <!-- Row title BEFORE the first full-width chart -->
-    <!-- Add tight-above here to match the reference spacing (KPI → title) -->
     <h2 class="row-title tight-above">Detailed Analysis of Malaysia's Healthcare Accessibility</h2>
 
-    <!-- Also use tight-above on the first full-width chart to match title → chart gap -->
     <div class="tile tile--full tight-above">
       <div id="choropleth_full" class="chart"></div>
       <p class="caption">
@@ -211,6 +255,22 @@
       </p>
     </div>
   </div>
+
+  <!-- ====== FOOTER (add to end of page) ====== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <p>Designed an created by <span class="credit">Somkiet Phromsuwan</span></p>
+
+      <h3>Data Sources:</h3>
+      <ul class="source-list">
+        <li>Data.gov.my: <a href="https://archive.data.gov.my/data/en_US/dataset/number-of-cases-and-incidence-rate-per-100000-population-of-communicable-diseases-malaysia/resource/5c371141-810e-4588-ac03-5a46a88e01a4#content">https://archive.data.gov.my/.../5c371141-810e-4588-ac03-5a46a88e01a4#content</a></li>
+        <li>Data.gov.my: <a href="https://archive.data.gov.my/data/en_US/dataset/number-of-private-hospitals-nursing-and-maternity-homes-and-beds-by-state-malaysia/resource/33fe894f-389b-45d6-9f5c-050eff368e32">https://archive.data.gov.my/.../33fe894f-389b-45d6-9f5c-050eff368e32</a></li>
+        <li>Data.gov.my: <a href="https://data.gov.my/data-catalogue/std_state">https://data.gov.my/data-catalogue/std_state</a></li>
+        <li>Data.gov.my: <a href="https://data.gov.my/data-catalogue/hospital_beds">https://data.gov.my/data-catalogue/hospital_beds</a></li>
+        <li>Mendeley Data: <a href="https://data.mendeley.com/datasets/r3k8rxg2cw/1">https://data.mendeley.com/datasets/r3k8rxg2cw/1</a></li>
+      </ul>
+    </div>
+  </footer>
 
   <script>
     // Specs
