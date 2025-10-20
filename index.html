@@ -59,7 +59,17 @@
       text-align:center;
     }
 
-    /* Auto-tighten spacing when a row title is followed by a full-width tile */
+    /* Equal, balanced spacing for the FIRST row title */
+    .dashboard > .row-title:first-of-type {
+      margin-top: 32px;   /* space from the dark header */
+      margin-bottom: 32px;/* space to the full-width chart */
+    }
+    /* Keep the first full-width chart snug to preserve equal spacing */
+    .dashboard > .row-title:first-of-type + .tile--full {
+      margin-top: 0;
+    }
+
+    /* Auto-tighten spacing when any row title is followed by a full-width tile */
     .row-title + .tile--full {
       margin-top: calc(-1 * var(--title-tighten));
     }
