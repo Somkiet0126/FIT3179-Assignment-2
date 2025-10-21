@@ -15,9 +15,14 @@
       --row-gap: 80px;       /* global grid row spacing */
       --title-tighten: 14px; /* how much to pull charts/titles upward when 'tight-above' is used */
       --gap-below-header: 48px;
+
+      /* Footer colors */
       --footer-bg: #243447;
       --footer-fg: #e5eff7;
       --footer-accent: #60a5fa;
+
+      /* NEW: shared page width so footer aligns with dashboard tiles */
+      --page-max: calc(var(--card-max-width) * 2 + var(--col-gap));
     }
 
     body {
@@ -45,9 +50,9 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       column-gap: var(--col-gap);
       row-gap: var(--row-gap);
-      max-width: calc(var(--card-max-width) * 2 + var(--col-gap));
+      max-width: var(--page-max);             /* ← shared with footer */
       margin: 0 auto 48px;
-      padding: var(--gap-below-header) 12px 24px;
+      padding: var(--gap-below-header) 12px 24px; /* 24px matches footer inner padding */
       align-items: start;
     }
     @media (max-width:1100px){
@@ -140,13 +145,17 @@
       background: var(--footer-bg);
       color: var(--footer-fg);
       margin-top: 56px;
-      padding: 28px 20px 36px;
-      text-align: left;              /* ← left aligned */
+      padding: 28px 0 36px;     /* no side padding here; use inner for alignment */
+      text-align: left;
       border-top: 4px solid rgba(255,255,255,0.06);
     }
     .footer-inner{
-      max-width: 980px;
+      max-width: var(--page-max); /* ← same width as dashboard */
       margin: 0 auto;
+      padding: 0 24px;            /* ← same side padding as .dashboard */
+    }
+    @media (max-width:1100px){
+      .footer-inner { max-width: var(--card-max-width); }
     }
     .site-footer h3{
       margin: 0 0 12px;
@@ -158,9 +167,9 @@
       font-size: 15px;
     }
     .source-list{
-      display: block;               /* ← block list */
-      text-align: left;             /* ← left aligned */
-      margin: 0;                    /* ← no auto-centering */
+      display: block;
+      text-align: left;
+      margin: 0;
       padding: 0;
       list-style: none;
       line-height: 1.6;
@@ -256,7 +265,7 @@
     </div>
   </div>
 
-  <!-- ====== FOOTER (left-aligned) ====== -->
+  <!-- ====== FOOTER (aligned with dashboard) ====== -->
   <footer class="site-footer" role="contentinfo">
     <div class="footer-inner">
       <p>Designed and created by <span class="credit">Somkiet Phromsuwan</span> on 21/10/2025</p>
