@@ -141,7 +141,7 @@
       color: var(--footer-fg);
       margin-top: 56px;
       padding: 28px 20px 36px;
-      text-align: center;
+      text-align: left;              /* ← left aligned */
       border-top: 4px solid rgba(255,255,255,0.06);
     }
     .footer-inner{
@@ -158,9 +158,9 @@
       font-size: 15px;
     }
     .source-list{
-      display: inline-block;
-      text-align: left;
-      margin: 0 auto;
+      display: block;               /* ← block list */
+      text-align: left;             /* ← left aligned */
+      margin: 0;                    /* ← no auto-centering */
       padding: 0;
       list-style: none;
       line-height: 1.6;
@@ -256,7 +256,7 @@
     </div>
   </div>
 
-  <!-- ====== FOOTER (add to end of page) ====== -->
+  <!-- ====== FOOTER (left-aligned) ====== -->
   <footer class="site-footer" role="contentinfo">
     <div class="footer-inner">
       <p>Designed and created by <span class="credit">Somkiet Phromsuwan</span> on 21/10/2025</p>
